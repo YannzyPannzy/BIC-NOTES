@@ -1,0 +1,62 @@
+<h1 id="physics-1-cheat-sheet">Physics 1 Cheat Sheet</h1>
+<p><time data-atom="date" datetime="2026-10-27">2026-10-27</time> · <span data-atom="mention" data-principal="u_MHVuhirLRIdJwa3F5RkEMA">@u_MHVuhirLRIdJwa3F5RkEMA</span></p>
+<pre><code class="language-latex">\begin{array}{ccc}
+\textcolor{#1d4ed8}{\large\textsf{\textbf{MUST KNOW}}} &amp; \qquad\textcolor{#15803d}{\large\textsf{\textbf{ANSWER}}}\qquad &amp; \textcolor{#dc2626}{\large\textsf{\textbf{WATCH OUT}}} \\
+\textcolor{#6b7280}{\small\textsf{learn it by heart}} &amp; \textcolor{#6b7280}{\small\textsf{worked result}} &amp; \textcolor{#6b7280}{\small\textsf{common mistake}}
+\end{array}</code></pre>
+<h2 id="1-units-and-conversions">1. Units and conversions</h2>
+<p><strong>Base units (Physics 1):</strong> length in metres (m), time in seconds (s), mass in kilograms (kg).</p>
+<p><strong>Prefixes</strong></p>
+<table><thead><tr><th>p</th><th>n</th><th>µ</th><th>m</th><th>c</th><th>d</th><th>—</th><th>da</th><th>h</th><th>k</th><th>M</th><th>G</th><th>T</th></tr></thead><tbody><tr><td>10⁻¹²</td><td>10⁻⁹</td><td>10⁻⁶</td><td>10⁻³</td><td>10⁻²</td><td>10⁻¹</td><td>1</td><td>10</td><td>10²</td><td>10³</td><td>10⁶</td><td>10⁹</td><td>10¹²</td></tr></tbody></table>
+<p><strong>Speed</strong></p>
+<pre><code class="language-latex">\boxed{\ \textcolor{#1d4ed8}{3.6\ \tfrac{\text{km}}{\text{h}} = 1\ \tfrac{\text{m}}{\text{s}}}\ } \qquad \text{km/h} \xrightarrow{\ \div 3.6\ } \text{m/s} \qquad \text{m/s} \xrightarrow{\ \times 3.6\ } \text{km/h}</code></pre>
+<p><strong>Area and volume: square or cube the factor</strong></p>
+<pre><code class="language-latex">1\ \text{m} = 10\ \text{dm} \;\Rightarrow\; 1\ \text{m}^2 = \textcolor{#dc2626}{10^2}\ \text{dm}^2, \qquad 1\ \text{m}^3 = \textcolor{#dc2626}{10^3}\ \text{dm}^3 = 1000\ \text{dm}^3</code></pre>
+<p><strong>Useful equals</strong></p>
+<pre><code class="language-latex">1\ \text{dm}^3 = 1\ \text{L} \qquad 1\ \text{h} = 3600\ \text{s} \qquad 1\ \text{t} = 1000\ \text{kg} \qquad 1\ \tfrac{\text{g}}{\text{cm}^3} = 1\ \tfrac{\text{kg}}{\text{dm}^3} = 1000\ \tfrac{\text{kg}}{\text{m}^3}</code></pre>
+<p><strong>Derived units</strong></p>
+<pre><code class="language-latex">\begin{aligned}
+F &amp;= m a &amp; [\text{N}] &amp;= \text{kg} \cdot \tfrac{\text{m}}{\text{s}^2} \\
+W &amp;= F \cdot d &amp; [\text{J}] &amp;= \text{N} \cdot \text{m} \\
+P &amp;= \tfrac{W}{t} &amp; [\text{W}] &amp;= \tfrac{\text{J}}{\text{s}} \\
+p &amp;= \tfrac{F}{A} &amp; [\text{Pa}] &amp;= \tfrac{\text{N}}{\text{m}^2} \\
+\rho &amp;= \tfrac{m}{V} &amp; [\rho] &amp;= \tfrac{\text{kg}}{\text{m}^3}
+\end{aligned}</code></pre>
+<h2 id="2-constants-and-shapes">2. Constants and shapes</h2>
+<table><thead><tr><th>Constant</th><th>Value</th></tr></thead><tbody><tr><td>Speed of light c</td><td>3 · 10⁸ m/s</td></tr><tr><td>Speed of sound</td><td>343 m/s</td></tr><tr><td>g</td><td>9.8 ≈ 10 m/s²</td></tr><tr><td>Avogadro N_A</td><td>6 · 10²³</td></tr><tr><td>Earth&#39;s radius</td><td>6.4 · 10⁶ m (some sheets use 6 · 10⁶ m)</td></tr></tbody></table>
+<p><strong>Shapes</strong></p>
+<pre><code class="language-latex">\text{circle: } C = 2\pi r, \ A = \pi r^2 \qquad \text{sphere: } A = 4\pi r^2, \ V = \tfrac{4}{3}\pi r^3 \qquad \text{cube: } V = L^3</code></pre>
+<p><strong>Molecules</strong> (n = moles, M = molar mass)</p>
+<pre><code class="language-latex">n = \frac{m}{M} \qquad N = n \cdot N_A</code></pre>
+<h2 id="3-uniform-linear-motion-v-constant">3. Uniform linear motion (v = constant)</h2>
+<pre><code class="language-latex">\boxed{\ \textcolor{#1d4ed8}{v = \frac{\Delta x}{\Delta t} = \frac{s}{t}}\ } \qquad\qquad t = \frac{s}{v} \qquad\qquad s = v \cdot t</code></pre>
+<p><strong>Distance vs displacement</strong></p>
+<table><thead><tr><th></th><th>Distance</th><th>Displacement</th></tr></thead><tbody><tr><td>Type</td><td>scalar, always ≥ 0</td><td>vector, has a sign</td></tr><tr><td>Meaning</td><td>total path</td><td>final position − start position</td></tr></tbody></table>
+<p><strong>Averages</strong></p>
+<pre><code class="language-latex">\text{average speed} = \frac{\text{total } \textcolor{#dc2626}{\text{distance}}}{\text{total time}} \qquad\qquad \text{average velocity} = \frac{\textcolor{#dc2626}{\text{displacement}}}{\text{total time}}</code></pre>
+<p>Breaks and stops count in the total time.</p>
+<p><strong>Graphs</strong></p>
+<ul><li><p>x–t graph: <strong>slope = velocity</strong></p></li><li><p>v–t graph: <strong>area = displacement</strong> (area below the axis is negative)</p></li></ul>
+<p><strong>Example from class (problem 12):</strong> +10 m/s for 6 s, then −5 m/s for 4 s.</p>
+<pre><code class="language-latex">\text{distance} = 60 + 20 = \textcolor{#15803d}{80 \text{ m}} \qquad \text{displacement} = 60 - 20 = \textcolor{#15803d}{+40 \text{ m}} \qquad \text{avg speed} = \textcolor{#15803d}{8 \tfrac{\text{m}}{\text{s}}} \qquad \text{avg velocity} = \textcolor{#15803d}{+4 \tfrac{\text{m}}{\text{s}}}</code></pre>
+<h2 id="4-average-speed">4. Average speed</h2>
+<p><strong>Always works</strong></p>
+<pre><code class="language-latex">\boxed{\ \textcolor{#1d4ed8}{\bar{v} = \frac{s_1 + s_2 + \dots}{t_1 + t_2 + \dots}}\ } \qquad t_i = \frac{s_i}{v_i}</code></pre>
+<p><strong>Same distance at two speeds</strong> (there and back, two halves)</p>
+<pre><code class="language-latex">\boxed{\ \textcolor{#1d4ed8}{\bar{v} = \frac{2 v_1 v_2}{v_1 + v_2}}\ } \qquad 40 \text{ and } 60 \tfrac{\text{km}}{\text{h}} \;\rightarrow\; \textcolor{#15803d}{48 \tfrac{\text{km}}{\text{h}}} \ \textcolor{#dc2626}{(\text{not } 50)}</code></pre>
+<p><strong>Same time at two speeds</strong> (only here can you just average)</p>
+<pre><code class="language-latex">\bar{v} = \frac{v_1 + v_2}{2}</code></pre>
+<p><strong>Speed needed for the rest of a trip</strong></p>
+<pre><code class="language-latex">v = \frac{\text{distance left}}{\text{time left}}</code></pre>
+<h2 id="5-relative-motion">5. Relative motion</h2>
+<pre><code class="language-latex">\boxed{\ \textcolor{#1d4ed8}{\text{same direction: } v_1 - v_2 \qquad\quad \text{opposite directions: } v_1 + v_2}\ }</code></pre>
+<p><strong>Meeting</strong> (moving towards each other, d apart)</p>
+<pre><code class="language-latex">\textcolor{#1d4ed8}{t = \frac{d}{v_1 + v_2}}</code></pre>
+<p><strong>Catching up</strong> (gap in front)</p>
+<pre><code class="language-latex">\textcolor{#1d4ed8}{t = \frac{\text{gap}}{v_{\text{fast}} - v_{\text{slow}}}}</code></pre>
+<p><strong>Always works:</strong> write each position and set them equal.</p>
+<pre><code class="language-latex">x_A = x_{A0} + v_A t \qquad x_B = x_{B0} + v_B t \qquad x_A = x_B</code></pre>
+<p><strong>Example (problem 23):</strong> A starts at 0 m going +10 m/s, B starts at 20 m going −6 m/s.</p>
+<pre><code class="language-latex">10t = 20 - 6t \;\Rightarrow\; 16t = 20 \;\Rightarrow\; \textcolor{#15803d}{t = 1.25 \text{ s}}, \qquad x = 10 \cdot 1.25 = \textcolor{#15803d}{12.5 \text{ m}}</code></pre>
+<p><strong>River</strong> (swimmer speed v, current u)</p>
+<pre><code class="language-latex">\text{downstream: } v + u \qquad \text{upstream: } v - u</code></pre>

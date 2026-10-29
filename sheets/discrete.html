@@ -1,0 +1,76 @@
+<h1 id="discrete-maths-cheat-sheet">Discrete Maths Cheat Sheet</h1>
+<p><time data-atom="date" datetime="2026-10-27">2026-10-27</time> · <span data-atom="mention" data-principal="u_MHVuhirLRIdJwa3F5RkEMA">@u_MHVuhirLRIdJwa3F5RkEMA</span></p>
+<pre><code class="language-latex">\begin{array}{ccc}
+\textcolor{#1d4ed8}{\large\textsf{\textbf{MUST KNOW}}} &amp; \qquad\textcolor{#15803d}{\large\textsf{\textbf{ANSWER}}}\qquad &amp; \textcolor{#dc2626}{\large\textsf{\textbf{WATCH OUT}}} \\
+\textcolor{#6b7280}{\small\textsf{learn it by heart}} &amp; \textcolor{#6b7280}{\small\textsf{worked result}} &amp; \textcolor{#6b7280}{\small\textsf{common mistake}}
+\end{array}</code></pre>
+<h2 id="1-symbols-and-number-sets">1. Symbols and number sets</h2>
+<p><strong>Symbols</strong></p>
+<table><thead><tr><th>Symbol</th><th>Meaning</th></tr></thead><tbody><tr><td>x ∈ A</td><td>x is in A</td></tr><tr><td>x ∉ A</td><td>x is not in A</td></tr><tr><td>B ⊆ A</td><td>every element of B is in A</td></tr><tr><td>∅ = { }</td><td>empty set</td></tr><tr><td>|A|</td><td>number of elements</td></tr><tr><td>A ∪ B</td><td>in A or B (or both)</td></tr><tr><td>A ∩ B</td><td>in both</td></tr><tr><td>A \ B</td><td>in A but not in B</td></tr><tr><td>A △ B</td><td>in exactly one of them</td></tr><tr><td>A′</td><td>not in A</td></tr></tbody></table>
+<p><strong>Must know: number sets</strong> (in class, 0 counts as natural)</p>
+<pre><code class="language-latex">\boxed{\ \textcolor{#1d4ed8}{\mathbb{N} = \{0, 1, 2, \dots\} \subset \mathbb{Z} \subset \mathbb{Q} \subset \mathbb{R}}\ } \qquad \mathbb{Q}^* = \text{irrationals } (\sqrt{2},\ \pi,\ e)</code></pre>
+<p><strong>Set-builder notation</strong> (the bar means &quot;such that&quot;; no number set given means ℝ)</p>
+<pre><code class="language-latex">\{\, x \mid 2 &lt; x &lt; 5,\ x \in \mathbb{Z} \,\} = \textcolor{#15803d}{\{3, 4\}}</code></pre>
+<p><strong>Watch out: order and repeats don&#39;t matter</strong></p>
+<pre><code class="language-latex">\{2, 5, 3\} = \{5, 2, 3\} = \textcolor{#dc2626}{\{2, 5, 3, 5\}}</code></pre>
+<p><strong>Intervals</strong></p>
+<pre><code class="language-latex">]a, b[ \;=\; (a, b) \ \text{open (ends excluded)} \qquad [a, b] \ \text{closed (ends included)} \qquad ]a, +\infty[ \;=\; \{x \mid x &gt; a\}</code></pre>
+<h2 id="2-operations-and-laws">2. Operations and laws</h2>
+<p><strong>De Morgan</strong></p>
+<pre><code class="language-latex">\boxed{\ \textcolor{#1d4ed8}{(A \cup B)&#39; = A&#39; \cap B&#39; \qquad\quad (A \cap B)&#39; = A&#39; \cup B&#39;}\ }</code></pre>
+<p>Taking the complement of a bracket flips ∪ ↔ ∩.</p>
+<p><strong>Difference and symmetric difference</strong></p>
+<pre><code class="language-latex">A \setminus B = A \cap B&#39; \qquad\qquad A \,\triangle\, B = (A \cup B) \setminus (A \cap B)</code></pre>
+<p><strong>Distributive laws</strong></p>
+<pre><code class="language-latex">A \cap (B \cup C) = (A \cap B) \cup (A \cap C) \qquad\qquad A \cup (B \cap C) = (A \cup B) \cap (A \cup C)</code></pre>
+<p><strong>Simplifying</strong></p>
+<pre><code class="language-latex">\begin{aligned}
+A \cup A&#39; &amp;= U &amp; A \cap A&#39; &amp;= \emptyset &amp; (A&#39;)&#39; &amp;= A \\
+A \cup \emptyset &amp;= A &amp; A \cap U &amp;= A &amp; A \cup (A \cap B) &amp;= A
+\end{aligned}</code></pre>
+<p><strong>If A ⊆ B</strong></p>
+<pre><code class="language-latex">A \cup B = B \qquad A \cap B = A \qquad A \setminus B = \emptyset</code></pre>
+<p><strong>Order matters for</strong> A \ B and A × B (the others don&#39;t care).</p>
+<p><strong>Closure (H1 from class):</strong> does the answer always stay in the set?</p>
+<table><thead><tr><th></th><th>ℤ⁺</th><th>ℤ⁻</th><th>ℚ⁺</th><th>ℚ⁻</th><th>Primes</th></tr></thead><tbody><tr><td>a + b</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>✗</td></tr><tr><td>a · b</td><td>✓</td><td>✗</td><td>✓</td><td>✗</td><td>✗</td></tr><tr><td>a − b</td><td>✗</td><td>✗</td><td>✗</td><td>✗</td><td>✗</td></tr><tr><td>a ÷ b</td><td>✗</td><td>✗</td><td>✓</td><td>✗</td><td>✗</td></tr></tbody></table>
+<h2 id="3-counting-elements">3. Counting elements</h2>
+<p><strong>Two sets</strong></p>
+<pre><code class="language-latex">\boxed{\ \textcolor{#1d4ed8}{|A \cup B| = |A| + |B|} \textcolor{#dc2626}{\,- |A \cap B|}\ }</code></pre>
+<pre><code class="language-latex">\begin{aligned}
+\text{only A:} \quad &amp; |A \setminus B| = |A| - |A \cap B| \\
+\text{exactly one:} \quad &amp; |A \cup B| - |A \cap B| \\
+\text{neither:} \quad &amp; |U| - |A \cup B|
+\end{aligned}</code></pre>
+<p><strong>Example (sheet 2):</strong> 35 people, 21 drink Coca-Cola, 19 Fanta, 12 both.</p>
+<pre><code class="language-latex">\text{at least one} = 21 + 19 - 12 = \textcolor{#15803d}{28} \qquad \text{neither} = 35 - 28 = \textcolor{#15803d}{7} \qquad \text{exactly one} = 28 - 12 = \textcolor{#15803d}{16}</code></pre>
+<p><strong>Three sets</strong></p>
+<pre><code class="language-latex">\boxed{\ \textcolor{#1d4ed8}{|A \cup B \cup C| = |A| + |B| + |C| - |A \cap B| - |A \cap C| - |B \cap C|} \textcolor{#dc2626}{\,+ |A \cap B \cap C|}\ }</code></pre>
+<p><strong>Venn method for word problems</strong></p>
+<ol><li><p>Fill the middle (all three) first.</p></li><li><p>Then each pair, minus the middle.</p></li><li><p>Then each &quot;only&quot; part.</p></li><li><p>Then the outside (neither).</p></li><li><p>Unknown? Use x and make all regions add up to |U|.</p></li></ol>
+<p><strong>Watch out:</strong> &quot;A and B&quot; includes the middle. &quot;Only A and B&quot; doesn&#39;t. &quot;Or&quot; means at least one.</p>
+<h2 id="4-subsets-and-products">4. Subsets and products</h2>
+<p><strong>Number of subsets</strong> (class, 20 Oct)</p>
+<pre><code class="language-latex">\boxed{\ \textcolor{#1d4ed8}{\text{a set with } n \text{ elements has } 2^n \text{ subsets}}\ } \qquad \{a, b, c\} \rightarrow \textcolor{#15803d}{2^3 = 8}</code></pre>
+<p>The empty set and the set itself both count.</p>
+<p><strong>Counting elements when sets are inside sets</strong></p>
+<pre><code class="language-latex">|\{\}| = 0 \qquad \textcolor{#dc2626}{|\{\{\}\}| = 1} \qquad |\{1, 2, \{3, 4\}\}| = 3</code></pre>
+<p><strong>Element vs subset</strong></p>
+<pre><code class="language-latex">a \in A \iff \{a\} \subseteq A</code></pre>
+<p><strong>Cartesian product</strong> (all ordered pairs)</p>
+<pre><code class="language-latex">A \times B = \{(a, b) \mid a \in A,\ b \in B\} \qquad \boxed{\ \textcolor{#1d4ed8}{|A \times B| = |A| \cdot |B|}\ }</code></pre>
+<p><strong>Smallest and largest sizes</strong> (with |A| = a, |B| = b)</p>
+<pre><code class="language-latex">\begin{aligned}
+0 \le\ &amp;|A \cap B| \le \min(a, b) \\
+\max(a, b) \le\ &amp;|A \cup B| \le a + b
+\end{aligned}</code></pre>
+<p>The extremes happen when the sets don&#39;t overlap, or when one sits inside the other. If a universal set U is given, the intersection is at least a + b − |U|.</p>
+<h2 id="5-decimals-exact-values-and-regions">5. Decimals, exact values and regions</h2>
+<p><strong>Repeating decimal to fraction</strong> (method from class)</p>
+<pre><code class="language-latex">x = 1.\overline{5} \;\Rightarrow\; 10x = 15.\overline{5} \;\Rightarrow\; 9x = 14 \;\Rightarrow\; \textcolor{#15803d}{x = \frac{14}{9}}</code></pre>
+<p>Multiply by 10 for one repeating digit, 100 for two, then subtract.</p>
+<p><strong>Quick version:</strong> the repeating part over the same number of 9s.</p>
+<pre><code class="language-latex">0.\overline{5} = \textcolor{#15803d}{\frac{5}{9}} \qquad 0.\overline{25} = \textcolor{#15803d}{\frac{25}{99}} \qquad 1.\overline{25} = 1 + \frac{25}{99} = \textcolor{#15803d}{\frac{124}{99}}</code></pre>
+<p><strong>Exact values</strong> (board, 20 Oct)</p>
+<table><thead><tr><th></th><th>30°</th><th>45°</th><th>60°</th></tr></thead><tbody><tr><td>sin</td><td>1/2</td><td>1/√2</td><td>√3/2</td></tr><tr><td>cos</td><td>√3/2</td><td>1/√2</td><td>1/2</td></tr><tr><td>tan (tg)</td><td>1/√3</td><td>1</td><td>√3</td></tr></tbody></table>
+<p><strong>Regions in the xy-plane</strong></p>
+<pre><code class="language-latex">x^2 + y^2 \le r^2 \ \text{(disc, area } \pi r^2) \qquad x \ge 0,\ y \le 0 \ \text{(one quarter)} \qquad \text{AND} = \cap, \ \text{OR} = \cup</code></pre>

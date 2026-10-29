@@ -164,6 +164,21 @@ svg .t-b{fill:var(--blue)} svg .t-g{fill:var(--green)} svg .t-r{fill:var(--red)}
 }
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 </style>
+<style>
+.cheat{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-weight:400;font-size:1rem;line-height:1.55;padding-block:14px 8px}
+.cheat .back{margin:4px 0 0}
+.cheat h1{font-family:inherit;font-size:1.65rem;font-weight:700;margin:14px 0 4px}
+.cheat h2{font-family:inherit;font-size:1.2rem;font-weight:700;margin:30px 0 8px;padding-bottom:4px;border-bottom:1.5px solid var(--rule)}
+.cheat p{margin:10px 0 4px}
+.cheat ul,.cheat ol{margin:6px 0;padding-left:1.4em}
+.cheat li p{margin:2px 0}
+.cheat .tbl th,.cheat .tbl td{border:1px solid #cbd5e1;padding:4px 10px}
+.cheat .tbl th{background:#f8fafc}
+.cheat .m.d{margin:2px 0 6px}
+.cheat .katex-display>.katex{text-align:left}
+@media (max-width:640px){.cheat .katex{font-size:1em}}
+</style>
+
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 
 <div class="page">
@@ -188,7 +203,7 @@ svg .t-b{fill:var(--blue)} svg .t-g{fill:var(--green)} svg .t-r{fill:var(--red)}
   <div class="subject-head">
     <h2>College Algebra</h2>
     <p>Dr István Vajda · Mon 08:30 and Wed 13:45</p>
-    <p class="sheet-link"><a href="https://claude.ai/artifact/TqBPCzkXpGKkTPXHiDPLbx" target="_blank" rel="noopener">Open the cheat sheet →</a></p>
+    <p class="sheet-link"><a href="#cheat-algebra">Open the cheat sheet →</a></p>
     <div class="chips">
       <button data-go="alg-12-oct">Mon 12 Oct · Real numbers</button>
       <button data-go="alg-14-oct">Wed 14 Oct · Factorising, |x|</button>
@@ -903,7 +918,7 @@ x \lt 0: &amp;\quad x^2 = -x \Rightarrow x(x + 1) = 0 \Rightarrow x = -1 \ \ (0 
   <div class="subject-head">
     <h2>Discrete Mathematics</h2>
     <p>Dr Zsombor Szilágyi · Tue 10:15 and Fri 08:30</p>
-    <p class="sheet-link"><a href="https://claude.ai/artifact/Fxmqn5NFsaiAkxvLQeMYMt" target="_blank" rel="noopener">Open the cheat sheet →</a></p>
+    <p class="sheet-link"><a href="#cheat-discrete">Open the cheat sheet →</a></p>
     <p class="plan">Semester plan: Sets → Numbers (divisibility, primes, HCF/LCM, bases) → Counting → Probability. We're on Sets.</p>
     <div class="chips">
       <button data-go="dis-13-oct">Tue 13 Oct · Sets, number sets</button>
@@ -1056,7 +1071,7 @@ x^3 - 9x = 0 \Rightarrow x(x + 3)(x - 3) = 0 &amp;\Rightarrow \{-3, 0, 3\} \\
   <div class="subject-head">
     <h2>College Physics 1</h2>
     <p>Dr Zsombor Szilágyi · Tue 08:30</p>
-    <p class="sheet-link"><a href="https://claude.ai/artifact/U3Ca1qMDzvMMBxzm6Fem6E" target="_blank" rel="noopener">Open the cheat sheet →</a></p>
+    <p class="sheet-link"><a href="#cheat-physics">Open the cheat sheet →</a></p>
     <p class="plan">Semester plan: SI units → 1D motion → 2D motion → forces, energy, momentum → mixed problems. We're on uniform motion.</p>
     <div class="chips">
       <button data-go="phy-13-oct">Tue 13 Oct · SI units</button>
@@ -1200,6 +1215,303 @@ c &amp;= 3 \cdot 10^8 \tfrac{\text{m}}{\text{s}} \\
   </article>
 </section>
 
+<section class="cheat" id="cheat-algebra" hidden>
+<p class="sheet-link back"><a href="#algebra">← Back to notes</a></p>
+<h1>College Algebra Cheat Sheet</h1>
+
+
+<h2>1. Sums and number sets</h2>
+<p><strong>Must know</strong></p>
+<div class="m d">\boxed{\ \textcolor{#1d4ed8}{1 + 2 + \dots + n = \frac{n(n+1)}{2}}\ }</div><div class="m d">\textcolor{#1d4ed8}{1 + 3 + 5 + \dots + (2n - 1) = n^2}</div>
+<p><strong>Evenly spaced list</strong></p>
+<div class="m d">\text{sum} = \frac{(\text{first} + \text{last}) \cdot \text{count}}{2}</div><div class="m d">\text{count} = \frac{\text{last} - \text{first}}{\text{step}} + 1</div>
+<p><strong>Percent</strong></p>
+<div class="m d">p\% \text{ of } x = \frac{p}{100} \cdot x</div>
+<p><strong>Even or odd</strong></p>
+<ul><li><p>A product is odd only if every factor is odd.</p></li><li><p>A sum is odd only if it has an odd number of odd terms.</p></li></ul>
+<p><strong>Laws of real numbers</strong> (boxed in class, 12 Oct)</p>
+<div class="m d">\begin{gathered} a + b = b + a \\ ab = ba \\ (a + b) + c = a + (b + c) \\ (ab)c = a(bc) \\ (a + b)\,c = ac + bc \\ \textcolor{#dc2626}{a - b \neq b - a \qquad \tfrac{a}{b} \neq \tfrac{b}{a}} \end{gathered}</div>
+<p><strong>Number sets</strong></p>
+<div class="m d">\begin{gathered} \mathbb{N} = \{0, 1, 2, \dots\} \subset \mathbb{Z} \subset \mathbb{Q} \subset \mathbb{R} \\ \mathbb{Q} = \left\{ \tfrac{p}{q} \;\middle|\; p, q \in \mathbb{Z},\ q \neq 0 \right\} \\ \text{irrationals} = \mathbb{R} \setminus \mathbb{Q} \end{gathered}</div>
+<p>Rational = the decimal ends or repeats. Irrational = it never ends and never repeats.</p>
+<p><strong>Watch out:</strong> rational ± irrational and (non-zero rational) × irrational are always irrational, but two irrationals can give a rational.</p>
+<div class="m d">\textcolor{#dc2626}{\sqrt{2} + (-\sqrt{2}) = 0}</div><div class="m d">\textcolor{#dc2626}{\sqrt{3} \cdot \sqrt{3} = 3}</div>
+<p><strong>Proof that √2 is irrational</strong></p>
+<div class="m d">\sqrt{2} = \frac{p}{q} \ \text{(lowest terms)}</div><div class="m d">\Rightarrow\; 2q^2 = p^2</div><div class="m d">\Rightarrow\; p \text{ even}</div><div class="m d">\Rightarrow\; q \text{ even}</div><div class="m d">\Rightarrow\; \textcolor{#dc2626}{\text{contradiction}}</div>
+<h2>2. Identities</h2>
+<p><strong>Must know: the card from class</strong> (left to right to expand, right to left to factorise)</p>
+<div class="m d">\begin{aligned}
+(a+b)^2 &amp;= a^2 + \textcolor{#dc2626}{2ab} + b^2 \\
+(a-b)^2 &amp;= a^2 \textcolor{#dc2626}{- 2ab} + b^2 \\
+\textcolor{#1d4ed8}{a^2 - b^2} &amp;\textcolor{#1d4ed8}{= (a+b)(a-b)} \\
+(x+a)(x+b) &amp;= x^2 + (a+b)x + ab \\
+(a+b)^3 &amp;= a^3 + 3a^2b + 3ab^2 + b^3 \\
+(a-b)^3 &amp;= a^3 - 3a^2b + 3ab^2 - b^3 \\
+a^3 + b^3 &amp;= (a+b)(a^2 \textcolor{#dc2626}{- ab} + b^2) \\
+a^3 - b^3 &amp;= (a-b)(a^2 \textcolor{#dc2626}{+ ab} + b^2) \\
+(a+b+c)^2 &amp;= a^2 + b^2 + c^2 + 2ab + 2bc + 2ca
+\end{aligned}</div>
+<p><strong>Watch out:</strong> the red parts are the ones people forget. (a + b)² is not a² + b².</p>
+<p><strong>Shortcuts</strong></p>
+<div class="m d">\begin{aligned}
+a^2 + b^2 &amp;= (a+b)^2 - 2ab \\[4pt]
+x^2 + \frac{1}{x^2} &amp;= \left(x + \frac{1}{x}\right)^2 - 2
+\end{aligned}</div>
+<p><strong>Example (homework 19 Oct):</strong> if b + 1/b = 6, find b² + 1/b².</p>
+<div class="m d">\left(b + \frac{1}{b}\right)^2 = 36</div><div class="m d">\Rightarrow\; b^2 + 2 + \frac{1}{b^2} = 36</div><div class="m d">\Rightarrow\; \textcolor{#15803d}{b^2 + \frac{1}{b^2} = 34}</div>
+<h2>3. Factorising</h2>
+<p><strong>Method: try in this order, then repeat on every bracket</strong></p>
+<ol><li><p>Common factor</p></li><li><p>Difference of squares</p></li><li><p>Sum or difference of cubes</p></li><li><p>Perfect square</p></li><li><p>Quadratic (section 4)</p></li><li><p>Four terms: group in pairs</p></li><li><p>Powers 4 and 2 (or 6 and 3): substitute y = x² (or y = x³)</p></li></ol>
+<p><strong>Examples from class and homework</strong></p>
+<div class="m d">\begin{aligned}
+6u^2v^2 - 3u^2v &amp;= \textcolor{#15803d}{3u^2v(2v - 1)} \\
+49x^2y^2 - 144a^2b^2 &amp;= \textcolor{#15803d}{(7xy - 12ab)(7xy + 12ab)} \\
+x^3 - 27 &amp;= \textcolor{#15803d}{(x - 3)(x^2 + 3x + 9)} \\
+x^2 - 12x + 36 &amp;= \textcolor{#15803d}{(x - 6)^2} \\
+m^2(n+1) + 2m(n+1) &amp;= \textcolor{#15803d}{m(n+1)(m+2)} \\
+10x + 2xy - 10y - 2y^2 &amp;= \textcolor{#15803d}{2(5 + y)(x - y)} \\
+x^4 - 10x^2 + 9 &amp;= \textcolor{#15803d}{(x-1)(x+1)(x-3)(x+3)} \\
+x^6 + 4x^3 + 4 &amp;= \textcolor{#15803d}{(x^3 + 2)^2}
+\end{aligned}</div>
+<p><strong>Cubes:</strong> 1, 8, 27, 64, 125, 216, 343, 512, 729, 1000</p>
+<h2>4. Quadratics</h2>
+<p><strong>Must know</strong> (for ax² + bx + c = 0)</p>
+<div class="m d">\boxed{\ \textcolor{#1d4ed8}{x_{1,2} = \frac{-b \pm \sqrt{\Delta}}{2a}}\ }</div><div class="m d">\textcolor{#1d4ed8}{\Delta = b^2 - 4ac}</div>
+<div class="m d">\Delta &gt; 0: \text{ two roots}</div><div class="m d">\Delta = 0: \text{ one root}</div><div class="m d">\Delta &lt; 0: \text{ no real roots}</div>
+<p><strong>Must know: roots to factors</strong></p>
+<div class="m d">\boxed{\ \textcolor{#1d4ed8}{ax^2 + bx + c = a(x - x_1)(x - x_2)}\ }</div>
+<p><strong>Watch out: the signs flip.</strong> Roots −2 and −3 give (x + 2)(x + 3), not (x − 2)(x − 3).</p>
+<p><strong>Quick factorising</strong></p>
+<ul><li><p>a = 1: two numbers that multiply to c and add to b.</p></li><li><p>a ≠ 1: two numbers that multiply to a·c and add to b. Split the middle term, then group.</p></li></ul>
+<p><strong>Examples</strong></p>
+<div class="m d">x^2 + 5x + 6 = \textcolor{#15803d}{(x + 2)(x + 3)}</div><div class="m d">8x^2 + 2x - 15 = 8x^2 + 12x - 10x - 15</div><div class="m d">= \textcolor{#15803d}{(2x + 3)(4x - 5)}</div>
+<p><strong>Known root:</strong> x = 2 is a root of x² + 3x + k. Substitute it:</p>
+<div class="m d">4 + 6 + k = 0 \;\Rightarrow\; \textcolor{#15803d}{k = -10}</div>
+<h2>5. Fractions and polynomial division</h2>
+<p><strong>Watch out: factorise first, then cancel factors, never single terms</strong></p>
+<div class="m d">\frac{a - b}{a^2 - b^2} = \frac{a - b}{(a - b)(a + b)}</div><div class="m d">= \textcolor{#15803d}{\frac{1}{a + b}}</div><div class="m d">\textcolor{#dc2626}{\frac{a + 2}{2} \neq a + 1}</div>
+<p><strong>Operations</strong></p>
+<div class="m d">\frac{a}{b} \cdot \frac{c}{d} = \frac{ac}{bd}</div><div class="m d">\frac{a}{b} \div \frac{c}{d} = \frac{a}{b} \cdot \frac{d}{c}</div><div class="m d">\frac{a}{b} + \frac{c}{d} = \frac{ad + bc}{bd}</div>
+<p><strong>Must know: sign flip</strong></p>
+<div class="m d">\boxed{\ \textcolor{#1d4ed8}{\frac{b - a}{a - b} = -1}\ }</div>
+<p><strong>Cond.:</strong> every denominator ≠ 0. Write it before you simplify.</p>
+<p><strong>Must know: polynomial division</strong> (dividend = divisor × quotient + remainder)</p>
+<div class="m d">\boxed{\ \textcolor{#1d4ed8}{P(x) = D(x) \cdot Q(x) + R(x)}\ }</div>
+<p><strong>Long division:</strong> divide the first terms, multiply back, subtract, repeat. Write 0 for any missing power.</p>
+<p><strong>Horner&#39;s method (dividing by x − c):</strong> bring the first coefficient down, multiply by c, add to the next, repeat. The last number is the remainder. For x + 2, use c = −2.</p>
+<p><strong>Example (notes 19 Oct):</strong> (3x⁵ + 5x⁴ − 4x³ + 7x + 3) ÷ (x + 2), coefficients 3, 5, −4, 0, 7, 3 with c = −2:</p>
+<div class="m d">3,\ -1,\ -2,\ 4,\ -1 \;\big|\; 5</div><div class="m d">\Rightarrow\; \textcolor{#15803d}{Q(x) = 3x^4 - x^3 - 2x^2 + 4x - 1, \quad R = 5}</div>
+<p><strong>Check the remainder fast</strong></p>
+<div class="m d">P(x) \div (x - c) \ \text{has remainder} \ P(c)</div>
+<h2>6. Absolute value</h2>
+<p><strong>Must know</strong> (it&#39;s a distance, so never negative)</p>
+<div class="m d">\boxed{\ \textcolor{#1d4ed8}{|a| = \begin{cases} a &amp; \text{if } a \ge 0 \\ -a &amp; \text{if } a &lt; 0 \end{cases}}\ }</div><div class="m d">|a - b| = |b - a|</div>
+<p><strong>Equations</strong></p>
+<div class="m d">\begin{aligned}
+|X| = k \ (k &gt; 0) &amp;\;\Rightarrow\; X = k \ \text{ or } \ X = -k \\
+|X| = |Y| &amp;\;\Rightarrow\; X = Y \ \text{ or } \ X = -Y \\
+|X| = \text{negative} &amp;\;\Rightarrow\; \textcolor{#dc2626}{\text{no solution}}
+\end{aligned}</div>
+<p><strong>Example (notes 14 Oct)</strong></p>
+<div class="m d">|2x - 10| = 4</div><div class="m d">\Rightarrow\; 2x - 10 = -4 \ \text{ or } \ 2x - 10 = 4</div><div class="m d">\Rightarrow\; \textcolor{#15803d}{x = 3 \ \text{ or } \ x = 7}</div>
+<p><strong>Cases method (an x outside the bars, or two bars)</strong></p>
+<ol><li><p>Find where each inside part = 0.</p></li><li><p>Inside ≥ 0: drop the bars. Inside &lt; 0: change its sign.</p></li><li><p>Solve.</p></li></ol>
+<p><strong>Watch out:</strong> keep only answers that fit their case.</p>
+<p><strong>Example (notes 21 Oct)</strong></p>
+<div class="m d">x + |x - 5| = 7:</div><div class="m d">x \ge 5: \ 2x - 5 = 7 \Rightarrow \textcolor{#15803d}{x = 6}</div><div class="m d">x &lt; 5: \ 5 = 7 \ \textcolor{#dc2626}{\text{impossible}}</div>
+<p><strong>Must know: graphs</strong></p>
+<div class="m d">\boxed{\ \textcolor{#1d4ed8}{f(x) = a\,|x - h| + k}\ }</div><div class="m d">\boxed{\ \textcolor{#1d4ed8}{\text{vertex } (h,\, k)}\ }</div>
+<ul><li><p>a &gt; 0: opens up, R = [k, +∞[</p></li><li><p>a &lt; 0: opens down, R = ]−∞, k]</p></li><li><p>D = ℝ unless a domain is given</p></li><li><p>|x − 4| moves right 4, |x + 4| moves left 4</p></li></ul>
+<p><strong>Examples (notes 26 Oct)</strong></p>
+<ul><li><p>x ↦ 2|x − 4| − 3: vertex (4, −3), R = [−3, +∞[</p></li><li><p>f(x) = 2|x − 1| − 3 on D = [−4, 4]: check the ends and the vertex, R = [−3, 7]</p></li><li><p>f(f(2)): work from the inside out</p></li></ul>
+<h2>7. Systems and rational equations</h2>
+<p><strong>Systems of two equations</strong></p>
+<ul><li><p><strong>Substitution:</strong> get x or y alone in one equation, put it into the other.</p></li><li><p><strong>Elimination:</strong> multiply so one variable matches, then add or subtract.</p></li><li><p><strong>Graph:</strong> the answer is where the two lines cross.</p></li><li><p>Parallel lines: no solution. Same line: infinitely many.</p></li></ul>
+<p><strong>Example (notes 21 Oct)</strong></p>
+<div class="m d">\begin{cases} 2x - y = 8 \\ -3x - 5y = 1 \end{cases}</div><div class="m d">y = 2x - 8</div><div class="m d">\Rightarrow\; -3x - 5(2x - 8) = 1</div><div class="m d">\Rightarrow\; \textcolor{#15803d}{(x, y) = (3, -2)}</div>
+<p><strong>Rational equations</strong></p>
+<ol><li><p><strong>Cond.:</strong> denominators ≠ 0.</p></li><li><p>Multiply both sides by the common denominator.</p></li><li><p>Solve.</p></li><li><p>Reject any answer that breaks the Cond.</p></li></ol>
+<p><strong>Watch out (notes 26 Oct):</strong> an answer can break the Cond.</p>
+<div class="m d">\frac{1}{x - 2} + 3 = \frac{3 - x}{x - 2}, \ \ \text{Cond.: } x \neq 2</div><div class="m d">1 + 3(x - 2) = 3 - x</div><div class="m d">\Rightarrow\; \textcolor{#dc2626}{x = 2 \ \text{rejected}}</div><div class="m d">\Rightarrow\; \text{NO SOLUTION}</div>
+<p><strong>Example (notes 26 Oct)</strong></p>
+<div class="m d">\frac{2x}{x + 3} + \frac{5}{x} - 4 = \frac{18}{x^2 + 3x}, \ \ \text{Cond.: } x \neq 0,\ x \neq -3</div><div class="m d">\Rightarrow\; 2x^2 + 7x + 3 = 0</div><div class="m d">\Rightarrow\; \textcolor{#15803d}{x = -\tfrac{1}{2}} \ \ (\textcolor{#dc2626}{x = -3 \text{ rejected}})</div>
+<h2>8. Word problems</h2>
+<p><strong>Words to equations</strong></p>
+<div class="m d">\begin{aligned}
+\text{&quot;A exceeds B by 17&quot;} &amp;\;\rightarrow\; A = B + 17 \\
+\text{&quot;3 more than twice x&quot;} &amp;\;\rightarrow\; 2x + 3 \\
+\text{&quot;56\% of the total&quot;} &amp;\;\rightarrow\; 0.56\,(x + y)
+\end{aligned}</div>
+<p><strong>Shapes</strong></p>
+<div class="m d">\text{rectangle: } P = 2(l + w), \quad A = l \cdot w</div><div class="m d">\text{box: } V = l \cdot w \cdot h</div>
+<p><strong>Must know: ratio a : b of a total N</strong></p>
+<div class="m d">\boxed{\ \textcolor{#1d4ed8}{N \cdot \frac{a}{a + b} \ \text{ and } \ N \cdot \frac{b}{a + b}}\ }</div><div class="m d">350 \text{ in } 4 : 3 \;\rightarrow\; \textcolor{#15803d}{200 \text{ and } 150}</div>
+<p><strong>Similar triangles (notes 21 Oct)</strong></p>
+<div class="m d">\frac{h}{142 \text{ ft}} = \frac{48 \text{ in}}{6 \text{ in}} = 8</div><div class="m d">\Rightarrow\; \textcolor{#15803d}{h = 1136 \text{ ft}}</div>
+<p><strong>Speed</strong> (dog example, homework 26 Oct)</p>
+<div class="m d">s = v \cdot t</div><div class="m d">t_{\text{total}} = \frac{s_1}{v_1} + \frac{s_2}{v_2}</div><div class="m d">\frac{100}{5} + \frac{120}{8} = 20 + 15</div><div class="m d">= \textcolor{#15803d}{35 \text{ s}}</div>
+<p><strong>Towards each other</strong> (trains and fly, homework 28 Oct): the gap closes at v₁ + v₂.</p>
+<div class="m d">t_{\text{meet}} = \frac{100 \text{ km}}{50 + 50 \text{ km/h}}</div><div class="m d">= 1 \text{ h}</div><div class="m d">s_{\text{fly}} = 100 \tfrac{\text{km}}{\text{h}} \cdot 1 \text{ h}</div><div class="m d">= \textcolor{#15803d}{100 \text{ km}}</div>
+<p><strong>Method:</strong> name the unknowns, write one equation per fact, solve, check the answer in the original words.</p>
+<h2>9. Rational inequalities</h2>
+<p><strong>Must know: dividing by a negative flips the sign</strong></p>
+<div class="m d">\boxed{\ \textcolor{#1d4ed8}{-3x &gt; 9 \ \big/ \div(-3) \;\Rightarrow\; x &lt; -3}\ }</div><div class="m d">2x &gt; 6 \ \big/ \div 2 \;\Rightarrow\; x &gt; 3</div>
+<p><strong>Sign lines method</strong></p>
+<ol><li><p>Factorise the top and the bottom.</p></li><li><p>Mark every zero on the number line.</p></li><li><p>Draw a sign line for each factor, then multiply the signs in each interval.</p></li><li><p>Read off S. Zeros of the bottom are always open; zeros of the top are closed only for ≥ or ≤.</p></li></ol>
+<p><strong>Example (notes 28 Oct)</strong></p>
+<div class="m d">\frac{x^2 - 6x + 8}{x + 3} &gt; 0</div><div class="m d">\Rightarrow\; \frac{(x - 2)(x - 4)}{x + 3} &gt; 0</div><div class="m d">\Rightarrow\; \textcolor{#15803d}{S = \,]{-3}, 2[\ \cup\ ]4, +\infty[}</div>
+<h2>10. Square roots</h2>
+<p><strong>Must know: definition</strong> (a ≥ 0): b = √a means b ≥ 0 and b² = a.</p>
+<div class="m d">\boxed{\ \textcolor{#1d4ed8}{\sqrt{a^2} = |a|}\ }</div><div class="m d">(\sqrt{a})^2 = a</div><div class="m d">\sqrt{(-3)^2} = 3</div>
+<p><strong>Must know: rules</strong></p>
+<div class="m d">\textcolor{#1d4ed8}{\sqrt{a}\,\sqrt{b} = \sqrt{ab} \ \ (a, b \ge 0)}</div><div class="m d">\textcolor{#1d4ed8}{\frac{\sqrt{a}}{\sqrt{b}} = \sqrt{\frac{a}{b}} \ \ (a \ge 0,\ b &gt; 0)}</div><div class="m d">\textcolor{#1d4ed8}{\sqrt{a^n} = (\sqrt{a})^n \ \ (a \ge 0)}</div>
+<p><strong>Watch out</strong></p>
+<div class="m d">\textcolor{#dc2626}{\sqrt{9 + 16} = 5 \neq \sqrt{9} + \sqrt{16} = 7}</div><div class="m d">\textcolor{#dc2626}{\sqrt{(-2)(-8)} = 4, \text{ but not } \sqrt{-2}\,\sqrt{-8}}</div>
+<p><strong>Shortcuts:</strong> spot (a ± b)² under the root, and split off the biggest square factor.</p>
+<div class="m d">\sqrt{y^2 + 6y + 9} = \textcolor{#15803d}{|y + 3|}</div><div class="m d">\sqrt{12} - \sqrt{27} + \tfrac12\sqrt{48} = 2\sqrt3 - 3\sqrt3 + 2\sqrt3</div><div class="m d">= \textcolor{#15803d}{\sqrt3}</div>
+<p class="sheet-link back"><a href="#algebra">← Back to notes</a></p>
+</section>
+<section class="cheat" id="cheat-discrete" hidden>
+<p class="sheet-link back"><a href="#discrete">← Back to notes</a></p>
+<h1>Discrete Maths Cheat Sheet</h1>
+
+
+<h2>1. Symbols and number sets</h2>
+<p><strong>Symbols</strong></p>
+<div class="tbl"><table><thead><tr><th>Symbol</th><th>Meaning</th></tr></thead><tbody><tr><td>x ∈ A</td><td>x is in A</td></tr><tr><td>x ∉ A</td><td>x is not in A</td></tr><tr><td>B ⊆ A</td><td>every element of B is in A</td></tr><tr><td>∅ = { }</td><td>empty set</td></tr><tr><td>|A|</td><td>number of elements</td></tr><tr><td>A ∪ B</td><td>in A or B (or both)</td></tr><tr><td>A ∩ B</td><td>in both</td></tr><tr><td>A \ B</td><td>in A but not in B</td></tr><tr><td>A △ B</td><td>in exactly one of them</td></tr><tr><td>A′</td><td>not in A</td></tr></tbody></table></div>
+<p><strong>Must know: number sets</strong> (in class, 0 counts as natural)</p>
+<div class="m d">\boxed{\ \textcolor{#1d4ed8}{\mathbb{N} = \{0, 1, 2, \dots\} \subset \mathbb{Z} \subset \mathbb{Q} \subset \mathbb{R}}\ }</div><div class="m d">\mathbb{Q}^* = \text{irrationals } (\sqrt{2},\ \pi,\ e)</div>
+<p><strong>Set-builder notation</strong> (the bar means &quot;such that&quot;; no number set given means ℝ)</p>
+<div class="m d">\{\, x \mid 2 &lt; x &lt; 5,\ x \in \mathbb{Z} \,\} = \textcolor{#15803d}{\{3, 4\}}</div>
+<p><strong>Watch out: order and repeats don&#39;t matter</strong></p>
+<div class="m d">\{2, 5, 3\} = \{5, 2, 3\}</div><div class="m d">= \textcolor{#dc2626}{\{2, 5, 3, 5\}}</div>
+<p><strong>Intervals</strong></p>
+<div class="m d">]a, b[ \;=\; (a, b) \ \text{open (ends excluded)}</div><div class="m d">[a, b] \ \text{closed (ends included)}</div><div class="m d">]a, +\infty[ \;=\; \{x \mid x &gt; a\}</div>
+<h2>2. Operations and laws</h2>
+<p><strong>De Morgan</strong></p>
+<div class="m d">\boxed{\ \textcolor{#1d4ed8}{(A \cup B)&#39; = A&#39; \cap B&#39;}\ }</div><div class="m d">\boxed{\ \textcolor{#1d4ed8}{(A \cap B)&#39; = A&#39; \cup B&#39;}\ }</div>
+<p>Taking the complement of a bracket flips ∪ ↔ ∩.</p>
+<p><strong>Difference and symmetric difference</strong></p>
+<div class="m d">A \setminus B = A \cap B&#39;</div><div class="m d">A \,\triangle\, B = (A \cup B) \setminus (A \cap B)</div>
+<p><strong>Distributive laws</strong></p>
+<div class="m d">A \cap (B \cup C) = (A \cap B) \cup (A \cap C)</div><div class="m d">A \cup (B \cap C) = (A \cup B) \cap (A \cup C)</div>
+<p><strong>Simplifying</strong></p>
+<div class="m d">\begin{aligned}
+A \cup A&#39; &amp;= U &amp; A \cap A&#39; &amp;= \emptyset &amp; (A&#39;)&#39; &amp;= A \\
+A \cup \emptyset &amp;= A &amp; A \cap U &amp;= A &amp; A \cup (A \cap B) &amp;= A
+\end{aligned}</div>
+<p><strong>If A ⊆ B</strong></p>
+<div class="m d">A \cup B = B</div><div class="m d">A \cap B = A</div><div class="m d">A \setminus B = \emptyset</div>
+<p><strong>Order matters for</strong> A \ B and A × B (the others don&#39;t care).</p>
+<p><strong>Closure (H1 from class):</strong> does the answer always stay in the set?</p>
+<div class="tbl"><table><thead><tr><th></th><th>ℤ⁺</th><th>ℤ⁻</th><th>ℚ⁺</th><th>ℚ⁻</th><th>Primes</th></tr></thead><tbody><tr><td>a + b</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>✗</td></tr><tr><td>a · b</td><td>✓</td><td>✗</td><td>✓</td><td>✗</td><td>✗</td></tr><tr><td>a − b</td><td>✗</td><td>✗</td><td>✗</td><td>✗</td><td>✗</td></tr><tr><td>a ÷ b</td><td>✗</td><td>✗</td><td>✓</td><td>✗</td><td>✗</td></tr></tbody></table></div>
+<h2>3. Counting elements</h2>
+<p><strong>Two sets</strong></p>
+<div class="m d">\boxed{\ \textcolor{#1d4ed8}{|A \cup B| = |A| + |B|} \textcolor{#dc2626}{\,- |A \cap B|}\ }</div>
+<div class="m d">\begin{aligned}
+\text{only A:} \quad &amp; |A \setminus B| = |A| - |A \cap B| \\
+\text{exactly one:} \quad &amp; |A \cup B| - |A \cap B| \\
+\text{neither:} \quad &amp; |U| - |A \cup B|
+\end{aligned}</div>
+<p><strong>Example (sheet 2):</strong> 35 people, 21 drink Coca-Cola, 19 Fanta, 12 both.</p>
+<div class="m d">\text{at least one} = 21 + 19 - 12 = \textcolor{#15803d}{28}</div><div class="m d">\text{neither} = 35 - 28 = \textcolor{#15803d}{7}</div><div class="m d">\text{exactly one} = 28 - 12 = \textcolor{#15803d}{16}</div>
+<p><strong>Three sets</strong></p>
+<div class="m d">\boxed{\ \begin{aligned} \textcolor{#1d4ed8}{|A \cup B \cup C|} &\textcolor{#1d4ed8}{= |A| + |B| + |C|} \\ &\textcolor{#1d4ed8}{\quad - |A \cap B| - |A \cap C| - |B \cap C|} \\ &\textcolor{#dc2626}{\quad + |A \cap B \cap C|} \end{aligned}\ }</div>
+<p><strong>Venn method for word problems</strong></p>
+<ol><li><p>Fill the middle (all three) first.</p></li><li><p>Then each pair, minus the middle.</p></li><li><p>Then each &quot;only&quot; part.</p></li><li><p>Then the outside (neither).</p></li><li><p>Unknown? Use x and make all regions add up to |U|.</p></li></ol>
+<p><strong>Watch out:</strong> &quot;A and B&quot; includes the middle. &quot;Only A and B&quot; doesn&#39;t. &quot;Or&quot; means at least one.</p>
+<h2>4. Subsets and products</h2>
+<p><strong>Number of subsets</strong> (class, 20 Oct)</p>
+<div class="m d">\boxed{\ \textcolor{#1d4ed8}{\text{a set with } n \text{ elements has } 2^n \text{ subsets}}\ }</div><div class="m d">\{a, b, c\} \rightarrow \textcolor{#15803d}{2^3 = 8}</div>
+<p>The empty set and the set itself both count.</p>
+<p><strong>Counting elements when sets are inside sets</strong></p>
+<div class="m d">|\{\}| = 0</div><div class="m d">\textcolor{#dc2626}{|\{\{\}\}| = 1}</div><div class="m d">|\{1, 2, \{3, 4\}\}| = 3</div>
+<p><strong>Element vs subset</strong></p>
+<div class="m d">a \in A \iff \{a\} \subseteq A</div>
+<p><strong>Cartesian product</strong> (all ordered pairs)</p>
+<div class="m d">A \times B = \{(a, b) \mid a \in A,\ b \in B\}</div><div class="m d">\boxed{\ \textcolor{#1d4ed8}{|A \times B| = |A| \cdot |B|}\ }</div>
+<p><strong>Smallest and largest sizes</strong> (with |A| = a, |B| = b)</p>
+<div class="m d">\begin{aligned}
+0 \le\ &amp;|A \cap B| \le \min(a, b) \\
+\max(a, b) \le\ &amp;|A \cup B| \le a + b
+\end{aligned}</div>
+<p>The extremes happen when the sets don&#39;t overlap, or when one sits inside the other. If a universal set U is given, the intersection is at least a + b − |U|.</p>
+<h2>5. Decimals, exact values and regions</h2>
+<p><strong>Repeating decimal to fraction</strong> (method from class)</p>
+<div class="m d">x = 1.\overline{5}</div><div class="m d">\Rightarrow\; 10x = 15.\overline{5}</div><div class="m d">\Rightarrow\; 9x = 14</div><div class="m d">\Rightarrow\; \textcolor{#15803d}{x = \frac{14}{9}}</div>
+<p>Multiply by 10 for one repeating digit, 100 for two, then subtract.</p>
+<p><strong>Quick version:</strong> the repeating part over the same number of 9s.</p>
+<div class="m d">0.\overline{5} = \textcolor{#15803d}{\frac{5}{9}}</div><div class="m d">0.\overline{25} = \textcolor{#15803d}{\frac{25}{99}}</div><div class="m d">1.\overline{25} = 1 + \frac{25}{99}</div><div class="m d">= \textcolor{#15803d}{\frac{124}{99}}</div>
+<p><strong>Exact values</strong> (board, 20 Oct)</p>
+<div class="tbl"><table><thead><tr><th></th><th>30°</th><th>45°</th><th>60°</th></tr></thead><tbody><tr><td>sin</td><td>1/2</td><td>1/√2</td><td>√3/2</td></tr><tr><td>cos</td><td>√3/2</td><td>1/√2</td><td>1/2</td></tr><tr><td>tan (tg)</td><td>1/√3</td><td>1</td><td>√3</td></tr></tbody></table></div>
+<p><strong>Regions in the xy-plane</strong></p>
+<div class="m d">x^2 + y^2 \le r^2 \ \text{(disc, area } \pi r^2)</div><div class="m d">x \ge 0,\ y \le 0 \ \text{(one quarter)}</div><div class="m d">\text{AND} = \cap, \ \text{OR} = \cup</div>
+<p class="sheet-link back"><a href="#discrete">← Back to notes</a></p>
+</section>
+<section class="cheat" id="cheat-physics" hidden>
+<p class="sheet-link back"><a href="#physics">← Back to notes</a></p>
+<h1>Physics 1 Cheat Sheet</h1>
+
+
+<h2>1. Units and conversions</h2>
+<p><strong>Base units (Physics 1):</strong> length in metres (m), time in seconds (s), mass in kilograms (kg).</p>
+<p><strong>Prefixes</strong></p>
+<div class="tbl"><table><thead><tr><th>p</th><th>n</th><th>µ</th><th>m</th><th>c</th><th>d</th><th>—</th><th>da</th><th>h</th><th>k</th><th>M</th><th>G</th><th>T</th></tr></thead><tbody><tr><td>10⁻¹²</td><td>10⁻⁹</td><td>10⁻⁶</td><td>10⁻³</td><td>10⁻²</td><td>10⁻¹</td><td>1</td><td>10</td><td>10²</td><td>10³</td><td>10⁶</td><td>10⁹</td><td>10¹²</td></tr></tbody></table></div>
+<p><strong>Speed</strong></p>
+<div class="m d">\boxed{\ \textcolor{#1d4ed8}{3.6\ \tfrac{\text{km}}{\text{h}} = 1\ \tfrac{\text{m}}{\text{s}}}\ }</div><div class="m d">\text{km/h} \xrightarrow{\ \div 3.6\ } \text{m/s}</div><div class="m d">\text{m/s} \xrightarrow{\ \times 3.6\ } \text{km/h}</div>
+<p><strong>Area and volume: square or cube the factor</strong></p>
+<div class="m d">1\ \text{m} = 10\ \text{dm}</div><div class="m d">\Rightarrow\; 1\ \text{m}^2 = \textcolor{#dc2626}{10^2}\ \text{dm}^2,</div><div class="m d">1\ \text{m}^3 = \textcolor{#dc2626}{10^3}\ \text{dm}^3</div><div class="m d">= 1000\ \text{dm}^3</div>
+<p><strong>Useful equals</strong></p>
+<div class="m d">1\ \text{dm}^3 = 1\ \text{L}</div><div class="m d">1\ \text{h} = 3600\ \text{s}</div><div class="m d">1\ \text{t} = 1000\ \text{kg}</div><div class="m d">1\ \tfrac{\text{g}}{\text{cm}^3} = 1\ \tfrac{\text{kg}}{\text{dm}^3}</div><div class="m d">= 1000\ \tfrac{\text{kg}}{\text{m}^3}</div>
+<p><strong>Derived units</strong></p>
+<div class="m d">\begin{aligned}
+F &amp;= m a &amp; [\text{N}] &amp;= \text{kg} \cdot \tfrac{\text{m}}{\text{s}^2} \\
+W &amp;= F \cdot d &amp; [\text{J}] &amp;= \text{N} \cdot \text{m} \\
+P &amp;= \tfrac{W}{t} &amp; [\text{W}] &amp;= \tfrac{\text{J}}{\text{s}} \\
+p &amp;= \tfrac{F}{A} &amp; [\text{Pa}] &amp;= \tfrac{\text{N}}{\text{m}^2} \\
+\rho &amp;= \tfrac{m}{V} &amp; [\rho] &amp;= \tfrac{\text{kg}}{\text{m}^3}
+\end{aligned}</div>
+<h2>2. Constants and shapes</h2>
+<div class="tbl"><table><thead><tr><th>Constant</th><th>Value</th></tr></thead><tbody><tr><td>Speed of light c</td><td>3 · 10⁸ m/s</td></tr><tr><td>Speed of sound</td><td>343 m/s</td></tr><tr><td>g</td><td>9.8 ≈ 10 m/s²</td></tr><tr><td>Avogadro N_A</td><td>6 · 10²³</td></tr><tr><td>Earth&#39;s radius</td><td>6.4 · 10⁶ m (some sheets use 6 · 10⁶ m)</td></tr></tbody></table></div>
+<p><strong>Shapes</strong></p>
+<div class="m d">\text{circle: } C = 2\pi r, \ A = \pi r^2</div><div class="m d">\text{sphere: } A = 4\pi r^2, \ V = \tfrac{4}{3}\pi r^3</div><div class="m d">\text{cube: } V = L^3</div>
+<p><strong>Molecules</strong> (n = moles, M = molar mass)</p>
+<div class="m d">n = \frac{m}{M}</div><div class="m d">N = n \cdot N_A</div>
+<h2>3. Uniform linear motion (v = constant)</h2>
+<div class="m d">\boxed{\ \textcolor{#1d4ed8}{v = \frac{\Delta x}{\Delta t} = \frac{s}{t}}\ }</div><div class="m d">t = \frac{s}{v}</div><div class="m d">s = v \cdot t</div>
+<p><strong>Distance vs displacement</strong></p>
+<div class="tbl"><table><thead><tr><th></th><th>Distance</th><th>Displacement</th></tr></thead><tbody><tr><td>Type</td><td>scalar, always ≥ 0</td><td>vector, has a sign</td></tr><tr><td>Meaning</td><td>total path</td><td>final position − start position</td></tr></tbody></table></div>
+<p><strong>Averages</strong></p>
+<div class="m d">\text{average speed} = \frac{\text{total } \textcolor{#dc2626}{\text{distance}}}{\text{total time}}</div><div class="m d">\text{average velocity} = \frac{\textcolor{#dc2626}{\text{displacement}}}{\text{total time}}</div>
+<p>Breaks and stops count in the total time.</p>
+<p><strong>Graphs</strong></p>
+<ul><li><p>x–t graph: <strong>slope = velocity</strong></p></li><li><p>v–t graph: <strong>area = displacement</strong> (area below the axis is negative)</p></li></ul>
+<p><strong>Example from class (problem 12):</strong> +10 m/s for 6 s, then −5 m/s for 4 s.</p>
+<div class="m d">\text{distance} = 60 + 20</div><div class="m d">= \textcolor{#15803d}{80 \text{ m}}</div><div class="m d">\text{displacement} = 60 - 20</div><div class="m d">= \textcolor{#15803d}{+40 \text{ m}}</div><div class="m d">\text{avg speed} = \textcolor{#15803d}{8 \tfrac{\text{m}}{\text{s}}}</div><div class="m d">\text{avg velocity} = \textcolor{#15803d}{+4 \tfrac{\text{m}}{\text{s}}}</div>
+<h2>4. Average speed</h2>
+<p><strong>Always works</strong></p>
+<div class="m d">\boxed{\ \textcolor{#1d4ed8}{\bar{v} = \frac{s_1 + s_2 + \dots}{t_1 + t_2 + \dots}}\ }</div><div class="m d">t_i = \frac{s_i}{v_i}</div>
+<p><strong>Same distance at two speeds</strong> (there and back, two halves)</p>
+<div class="m d">\boxed{\ \textcolor{#1d4ed8}{\bar{v} = \frac{2 v_1 v_2}{v_1 + v_2}}\ }</div><div class="m d">40 \text{ and } 60 \tfrac{\text{km}}{\text{h}} \;\rightarrow\; \textcolor{#15803d}{48 \tfrac{\text{km}}{\text{h}}} \ \textcolor{#dc2626}{(\text{not } 50)}</div>
+<p><strong>Same time at two speeds</strong> (only here can you just average)</p>
+<div class="m d">\bar{v} = \frac{v_1 + v_2}{2}</div>
+<p><strong>Speed needed for the rest of a trip</strong></p>
+<div class="m d">v = \frac{\text{distance left}}{\text{time left}}</div>
+<h2>5. Relative motion</h2>
+<div class="m d">\boxed{\ \textcolor{#1d4ed8}{\text{same direction: } v_1 - v_2}\ }</div><div class="m d">\boxed{\ \textcolor{#1d4ed8}{\text{opposite directions: } v_1 + v_2}\ }</div>
+<p><strong>Meeting</strong> (moving towards each other, d apart)</p>
+<div class="m d">\textcolor{#1d4ed8}{t = \frac{d}{v_1 + v_2}}</div>
+<p><strong>Catching up</strong> (gap in front)</p>
+<div class="m d">\textcolor{#1d4ed8}{t = \frac{\text{gap}}{v_{\text{fast}} - v_{\text{slow}}}}</div>
+<p><strong>Always works:</strong> write each position and set them equal.</p>
+<div class="m d">x_A = x_{A0} + v_A t</div><div class="m d">x_B = x_{B0} + v_B t</div><div class="m d">x_A = x_B</div>
+<p><strong>Example (problem 23):</strong> A starts at 0 m going +10 m/s, B starts at 20 m going −6 m/s.</p>
+<div class="m d">10t = 20 - 6t</div><div class="m d">\Rightarrow\; 16t = 20</div><div class="m d">\Rightarrow\; \textcolor{#15803d}{t = 1.25 \text{ s}},</div><div class="m d">x = 10 \cdot 1.25 = \textcolor{#15803d}{12.5 \text{ m}}</div>
+<p><strong>River</strong> (swimmer speed v, current u)</p>
+<div class="m d">\text{downstream: } v + u</div><div class="m d">\text{upstream: } v - u</div>
+<p class="sheet-link back"><a href="#physics">← Back to notes</a></p>
+</section>
+
 <p class="updated">Last updated <span id="last-updated">Wed 28 Oct 2026</span> · built from Classe365 lecture notes and Dr Szilágyi's Drive</p>
 </div>
 
@@ -1259,6 +1571,38 @@ c &amp;= 3 \cdot 10^8 \tfrac{\text{m}}{\text{s}} \\
   });
   window.addEventListener('hashchange', fromHash);
   fromHash();
+})();
+</script>
+<script>
+(function(){
+  // cheat sheet pages: #cheat-algebra, #cheat-discrete, #cheat-physics
+  var subjects = ['algebra','discrete','physics'];
+  // shrink a formula a little (never below 80%) when it is slightly too wide for the screen
+  function fit(){
+    document.querySelectorAll('section.cheat:not([hidden]) .m.d').forEach(function(el){
+      var k = el.querySelector('.katex'); if(!k) return;
+      k.style.fontSize = '';
+      var over = el.scrollWidth / el.clientWidth;
+      if(over > 1.01) k.style.fontSize = Math.max(0.8, 0.99 / over) + 'em';
+    });
+  }
+  function route(){
+    var h = (location.hash || '').replace('#','');
+    var m = /^cheat-(algebra|discrete|physics)$/.exec(h);
+    document.querySelectorAll('section.cheat').forEach(function(c){ c.hidden = !m || c.id !== h; });
+    if(!m) return;
+    subjects.forEach(function(s){
+      var sec = document.getElementById('sec-'+s), tab = document.getElementById('tab-'+s);
+      if(sec) sec.hidden = true;
+      if(tab) tab.setAttribute('aria-selected', s === m[1] ? 'true' : 'false');
+    });
+    window.scrollTo(0, 0);
+    fit();
+  }
+  window.addEventListener('hashchange', route);
+  window.addEventListener('resize', fit);
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+  route();
 })();
 </script>
 </body></html>
