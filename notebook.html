@@ -169,7 +169,7 @@ svg .t-b{fill:var(--blue)} svg .t-g{fill:var(--green)} svg .t-r{fill:var(--red)}
 <div class="page">
 <header class="top">
   <h1>BIC Notebook</h1>
-  <p class="sub">Foundation year · Semester 1 · notes up to <span id="upto">Mon 26 Oct</span></p>
+  <p class="sub">Foundation year · Semester 1 · notes up to <span id="upto">Wed 28 Oct</span></p>
   <div class="key" aria-label="Colour key">
     <span><span class="k-b">MUST KNOW</span><small>learn it by heart</small></span>
     <span><span class="k-g">ANSWER</span><small>worked result</small></span>
@@ -195,6 +195,7 @@ svg .t-b{fill:var(--blue)} svg .t-g{fill:var(--green)} svg .t-r{fill:var(--red)}
       <button data-go="alg-19-oct">Mon 19 Oct · Fractions, division</button>
       <button data-go="alg-21-oct">Wed 21 Oct · Word problems, systems</button>
       <button data-go="alg-26-oct">Mon 26 Oct · |x| functions, rational eq.</button>
+      <button data-go="alg-28-oct">Wed 28 Oct · Rational ineq., square roots</button>
     </div>
   </div>
 
@@ -798,6 +799,103 @@ x \lt 0: &amp;\quad x^2 = -x \Rightarrow x(x + 1) = 0 \Rightarrow x = -1 \ \ (0 
       </section>
     </div>
   </article>
+  <!-- ALG 28 OCT -->
+  <article class="entry" id="alg-28-oct">
+    <div class="when"><time datetime="2026-10-28">Wed<span>28 Oct</span></time></div>
+    <div class="body">
+      <h3>Rational inequalities · Square roots</h3>
+      <p class="lect">L11 Inequalities involving rational fractions · L12 Square roots</p>
+
+      <h4>Multiplying or dividing an inequality</h4>
+      <div class="m d">2x \gt 6 \ \ \big/ \div 2 \ \Rightarrow\ x \gt 3 \qquad\qquad -3x \gt 9 \ \ \big/ \div (-3) \ \Rightarrow\ \textcolor{#dc2626}{x \lt -3}</div>
+      <div class="box"><p>Dividing (or multiplying) by a <b>negative</b> number flips the sign: &gt; becomes &lt;. By a positive number the sign stays.</p></div>
+      <p>Check with a test value: <span class="m">x = -5</span> gives <span class="m">(-3)(-5) = 15 \gt 9</span> ✓, so the answer really is <span class="m">x \lt -3</span>.</p>
+
+      <h4>Rational inequalities: sign lines</h4>
+      <div class="box"><p>1. Find where the top and the bottom are 0. &nbsp; 2. Draw a sign line for each one under the number line. &nbsp; 3. Combine the signs and read off <b>S</b>.</p>
+        <p>Zeros of the bottom are <b>always open</b> ( ]  [ ). Zeros of the top are closed only for ≥ or ≤.</p></div>
+      <p><b>Ex 1 a)</b> <span class="m">\frac{1}{x - 2} \gt 0</span>: the top is 1, always positive, so the bottom must be positive: <span class="m">x - 2 \gt 0</span>.</p>
+      <p class="g"><b>S = ]2, +∞[</b></p>
+      <p><b>Ex 1 d)</b> <span class="m">\frac{2x - 6}{x + 8} \le 0</span>: top 0 at <span class="m">x = 3</span> (included), bottom 0 at <span class="m">x = -8</span> (excluded).</p>
+      <p class="g"><b>S = ]−8, 3]</b></p>
+      <p><b>Ex 3 a)</b> <span class="m">\frac{x^2 - 6x + 8}{x + 3} \gt 0</span>. Factorise the top first:</p>
+      <div class="m d">\frac{(x - 2)(x - 4)}{x + 3} \gt 0</div>
+      <div class="tbl"><table>
+        <tr><th class="l"></th><th>x &lt; −3</th><th>−3 &lt; x &lt; 2</th><th>2 &lt; x &lt; 4</th><th>x &gt; 4</th></tr>
+        <tr><th class="l">x − 2</th><td>−</td><td>−</td><td>+</td><td>+</td></tr>
+        <tr><th class="l">x − 4</th><td>−</td><td>−</td><td>−</td><td>+</td></tr>
+        <tr><th class="l">x + 3</th><td>−</td><td>+</td><td>+</td><td>+</td></tr>
+        <tr><th class="l">fraction</th><td class="r">−</td><td class="g"><b>+</b></td><td class="r">−</td><td class="g"><b>+</b></td></tr>
+      </table></div>
+      <p class="g"><b>S = ]−3, 2[ ∪ ]4, +∞[</b></p>
+      <p><b>2nd solution:</b> treat the top as one parabola. <span class="m">x^2 - 6x + 8 = 0</span>, <span class="m">\Delta = 36 - 32 = 4</span>, <span class="m">x_{1,2} = \frac{6 \pm 2}{2} = 4 \ \text{or}\ 2</span>. It opens up, so the top is negative only between 2 and 4. Then combine it with the sign of <span class="m">x + 3</span> as before.</p>
+
+      <h4>Square roots</h4>
+      <div class="box"><p><b>Def.:</b> if <span class="m">a \ge 0</span>, we call <span class="m">b</span> the square root of <span class="m">a</span> if <span class="m">b \ge 0</span> and <span class="m">b^2 = a</span>. &nbsp; Notation: <span class="m">b = \sqrt{a}</span></p></div>
+      <p><span class="m">\sqrt4 + \sqrt9 + \sqrt{16} + \sqrt{25} = 2 + 3 + 4 + 5 = </span><span class="g"><b>14</b></span></p>
+      <div class="m d">\sqrt{3^2} = \sqrt9 = 3 \qquad \sqrt{(-3)^2} = \sqrt9 = 3 \ \ (\text{not } -3)</div>
+      <div class="box"><div class="m d">\sqrt{a^2} = |a| \qquad\qquad (\sqrt{a})^2 = a \ \ (a \ge 0)</div>
+        <div class="m d">\sqrt{a}\,\sqrt{b} = \sqrt{ab} \ \ (a, b \ge 0) \qquad \frac{\sqrt{a}}{\sqrt{b}} = \sqrt{\frac{a}{b}} \ \ (a \ge 0,\ b \gt 0) \qquad \sqrt{a^n} = (\sqrt{a})^n \ \ (a \ge 0)</div></div>
+      <p class="oops"><span class="m">\sqrt{(-2)(-8)} = \sqrt{16} = 4</span>, but you can't split it into <span class="m">\sqrt{-2}\,\sqrt{-8}</span>: the rule needs <span class="m">a, b \ge 0</span>.</p>
+      <p class="oops"><span class="m">\sqrt{a + b} \neq \sqrt a + \sqrt b</span>: &nbsp; <span class="m">\sqrt9 + \sqrt{16} = 3 + 4 = 7</span>, but <span class="m">\sqrt{9 + 16} = \sqrt{25} = 5</span>.</p>
+
+      <h4>Express it without radicals (Ex 1)</h4>
+      <div class="m d">\sqrt4 = \textcolor{#15803d}{2} \qquad \sqrt{49} = \textcolor{#15803d}{7} \qquad \sqrt{a^2} = \textcolor{#15803d}{|a|} \qquad \sqrt{a^4} = \textcolor{#15803d}{a^2}</div>
+      <div class="m d">\sqrt{x^2 - 2x + 1} = \sqrt{(x - 1)^2} = \textcolor{#15803d}{|x - 1|} \qquad \sqrt{y^2 + 6y + 9} = \sqrt{(y + 3)^2} = \textcolor{#15803d}{|y + 3|}</div>
+      <p>Spot the identity <span class="m">(a \pm b)^2</span> under the root, then use <span class="m">\sqrt{a^2} = |a|</span>. A square root can also be written as a power: <span class="m">\sqrt{x^2 - 2x + 1} = (x^2 - 2x + 1)^{\frac12}</span>.</p>
+
+      <h4>Operations with roots (Ex 2 and Ex 3)</h4>
+      <div class="m d">\sqrt{100 \cdot 49} = \sqrt{100} \cdot \sqrt{49} = 10 \cdot 7 = \textcolor{#15803d}{70} \qquad \sqrt{121 \cdot 64} = 11 \cdot 8 = \textcolor{#15803d}{88}</div>
+      <div class="box"><p>To simplify a root, split off the biggest square factor: <span class="m">\sqrt{12} = \sqrt{4 \cdot 3} = 2\sqrt3</span>. Then collect like roots like like terms.</p></div>
+      <div class="m d">\sqrt{12} - \sqrt{27} + \tfrac12\sqrt{48} = 2\sqrt3 - 3\sqrt3 + \tfrac12 \cdot 4\sqrt3 = -\sqrt3 + 2\sqrt3 = \textcolor{#15803d}{\sqrt3}</div>
+
+      <section class="hw hide-w" aria-label="Homework set Wed 28 Oct">
+        <div class="hw-head"><h4>Homework (Wed 28 Oct)</h4><button type="button" class="hw-toggle" aria-pressed="true">Show working</button></div>
+        <ol class="hw-list">
+        <li><div class="qa">
+          <div class="sub"><p class="q">Two trains start 100 km apart on the same track and travel towards each other, each at 50 km/h. A fly starts at the first train and flies back and forth between them at 100 km/h until the trains collide. What total distance does the fly travel? (The two trains and the fly)</p>
+            <div class="w"><p>the gap closes at 50 + 50 = 100 km/h</p><p>time until they meet: t = <span class="fr"><span>100 km</span><span>100 km/h</span></span> = 1 h</p><p>the fly flies the whole hour: s = v · t = 100 · 1</p><p><span class="ans">100 km</span></p><p class="why"><b>Why?</b> Don't add up the zig-zags. Find how long the fly is in the air (until the trains meet), then distance = speed × time.</p></div></div>
+        </div></li>
+        <li><div class="qa">
+          <p class="q">Solve the inequalities. (Ex 1)</p>
+          <div class="sub"><p class="q"><b>e)</b> <span class="m">\frac{3x - 4}{x + 6} \ge 0</span></p>
+            <div class="w"><p>top = 0 at x = <span class="fr"><span>4</span><span>3</span></span> (included), bottom = 0 at x = −6 (excluded)</p><p>x &lt; −6: <span class="fr"><span>−</span><span>−</span></span> = + &nbsp; · &nbsp; −6 &lt; x &lt; <span class="fr"><span>4</span><span>3</span></span>: <span class="fr"><span>−</span><span>+</span></span> = − &nbsp; · &nbsp; x &gt; <span class="fr"><span>4</span><span>3</span></span>: <span class="fr"><span>+</span><span>+</span></span> = +</p><p><span class="ans">S = ]−∞, −6[ ∪ [4/3, +∞[</span></p><p class="why"><b>Why?</b> ≥ 0 lets the top be 0, so 4/3 is closed. The bottom can never be 0, so −6 is always open.</p></div></div>
+          <div class="sub"><p class="q"><b>f)</b> <span class="m">\frac{x(x - 2)}{x + 1} \gt 0</span></p>
+            <div class="w"><p>zeros: x = 0, x = 2 (top), x = −1 (bottom), all open because of &gt;</p><p>x &lt; −1: <span class="fr"><span>(−)(−)</span><span>−</span></span> = − &nbsp; · &nbsp; −1 &lt; x &lt; 0: <span class="fr"><span>(−)(−)</span><span>+</span></span> = +</p><p>0 &lt; x &lt; 2: <span class="fr"><span>(+)(−)</span><span>+</span></span> = − &nbsp; · &nbsp; x &gt; 2: <span class="fr"><span>(+)(+)</span><span>+</span></span> = +</p><p><span class="ans">S = ]−1, 0[ ∪ ]2, +∞[</span></p><p class="why"><b>Why?</b> Three factors give three zeros and four intervals. Work out the sign of each factor in each interval, then multiply the signs.</p></div></div>
+          <div class="sub"><p class="q"><b>g)</b> <span class="m">\frac{y - 4}{(y + 1)(y + 3)} \le 0</span></p>
+            <div class="w"><p>zeros: y = 4 (top, included), y = −1 and y = −3 (bottom, excluded)</p><p>y &lt; −3: <span class="fr"><span>−</span><span>(−)(−)</span></span> = − &nbsp; · &nbsp; −3 &lt; y &lt; −1: <span class="fr"><span>−</span><span>(−)(+)</span></span> = +</p><p>−1 &lt; y &lt; 4: <span class="fr"><span>−</span><span>(+)(+)</span></span> = − &nbsp; · &nbsp; y &gt; 4: <span class="fr"><span>+</span><span>(+)(+)</span></span> = +</p><p><span class="ans">S = ]−∞, −3[ ∪ ]−1, 4]</span></p><p class="why"><b>Why?</b> ≤ 0 wants the minus intervals, plus the zero of the top (4). −3 and −1 make the bottom 0, so they stay open.</p></div></div>
+          <div class="sub"><p class="q"><b>h)</b> <span class="m">\frac{(z - 1)(z + 3)}{(z - 5)(z + 1)} \gt 0</span></p>
+            <div class="w"><p>zeros in order: −3, −1, 1, 5 (all open)</p><p>z &lt; −3: <span class="fr"><span>(−)(−)</span><span>(−)(−)</span></span> = + &nbsp; · &nbsp; −3 &lt; z &lt; −1: <span class="fr"><span>(−)(+)</span><span>(−)(−)</span></span> = −</p><p>−1 &lt; z &lt; 1: <span class="fr"><span>(−)(+)</span><span>(−)(+)</span></span> = + &nbsp; · &nbsp; 1 &lt; z &lt; 5: <span class="fr"><span>(+)(+)</span><span>(−)(+)</span></span> = −</p><p>z &gt; 5: all + → +</p><p><span class="ans">S = ]−∞, −3[ ∪ ]−1, 1[ ∪ ]5, +∞[</span></p><p class="why"><b>Why?</b> Each zero here is a single factor, so the sign changes at every one of them: + − + − + from left to right.</p></div></div>
+        </div></li>
+        <li><div class="qa">
+          <p class="q">Express it without radicals. (Ex 1)</p>
+          <div class="sub"><p class="q"><b>k)</b> <span class="m">\sqrt{4p^2 - 4p + 1}</span></p>
+            <div class="w"><p>4p² − 4p + 1 = (2p)² − 2 · 2p · 1 + 1² = (2p − 1)²</p><p>√(2p − 1)² = <span class="ans">|2p − 1|</span></p><p class="why"><b>Why?</b> It's the identity (a − b)² with a = 2p, b = 1, and √(a²) = |a|.</p></div></div>
+          <div class="sub"><p class="q"><b>l)</b> <span class="m">\sqrt{9x^2 + 24x + 16}</span></p>
+            <div class="w"><p>9x² + 24x + 16 = (3x)² + 2 · 3x · 4 + 4² = (3x + 4)²</p><p>√(3x + 4)² = <span class="ans">|3x + 4|</span></p><p class="why"><b>Why?</b> (a + b)² with a = 3x, b = 4. Keep the bars: 3x + 4 can be negative.</p></div></div>
+        </div></li>
+        <li><div class="qa">
+          <p class="q">Perform the operations and simplify. (Ex 2)</p>
+          <div class="sub"><p class="q"><b>d)</b> <span class="m">\sqrt{121 \cdot 0.49}</span></p>
+            <div class="w"><p>√121 · √0.49 = 11 · 0.7</p><p>= <span class="ans">7.7</span></p><p class="why"><b>Why?</b> √(ab) = √a · √b. 0.7² = 0.49, so √0.49 = 0.7.</p></div></div>
+          <div class="sub"><p class="q"><b>e)</b> <span class="m">\sqrt{1.44 \cdot 0.16}</span></p>
+            <div class="w"><p>√1.44 · √0.16 = 1.2 · 0.4</p><p>= <span class="ans">0.48</span></p><p class="why"><b>Why?</b> 1.2² = 1.44 and 0.4² = 0.16. Root each factor, then multiply.</p></div></div>
+          <div class="sub"><p class="q"><b>f)</b> <span class="m">\sqrt{144 \cdot 36 \cdot 4}</span></p>
+            <div class="w"><p>√144 · √36 · √4 = 12 · 6 · 2</p><p>= <span class="ans">144</span></p><p class="why"><b>Why?</b> The product rule works for any number of non-negative factors.</p></div></div>
+        </div></li>
+        <li><div class="qa">
+          <p class="q">Perform the operations. (Ex 3)</p>
+          <div class="sub"><p class="q"><b>b)</b> <span class="m">3\sqrt2 + \sqrt{32} - \sqrt{200}</span></p>
+            <div class="w"><p>√32 = √(16 · 2) = 4√2, &nbsp; √200 = √(100 · 2) = 10√2</p><p>3√2 + 4√2 − 10√2 = <span class="ans">−3√2</span></p><p class="why"><b>Why?</b> Pull out the biggest square factor so every term is a multiple of √2, then add the numbers in front.</p></div></div>
+          <div class="sub"><p class="q"><b>c)</b> <span class="m">2\sqrt{72} - \sqrt{50} - 2\sqrt8</span></p>
+            <div class="w"><p>√72 = √(36 · 2) = 6√2, &nbsp; √50 = √(25 · 2) = 5√2, &nbsp; √8 = √(4 · 2) = 2√2</p><p>12√2 − 5√2 − 4√2 = <span class="ans">3√2</span></p><p class="why"><b>Why?</b> Same method. Multiply the 2 in front by the 6 and the 2 that come out of the roots.</p></div></div>
+          <div class="sub"><p class="q"><b>d)</b> <span class="m">5\sqrt3 + \tfrac13\sqrt{27} - \sqrt{48}</span></p>
+            <div class="w"><p>√27 = √(9 · 3) = 3√3, &nbsp; √48 = √(16 · 3) = 4√3</p><p>5√3 + <span class="fr"><span>1</span><span>3</span></span> · 3√3 − 4√3 = 5√3 + √3 − 4√3 = <span class="ans">2√3</span></p><p class="why"><b>Why?</b> Everything becomes a multiple of √3, so they are like terms: 5 + 1 − 4 = 2.</p></div></div>
+        </div></li>
+        </ol>
+      </section>
+    </div>
+  </article>
 </section>
 
 <!-- ===================================================== DISCRETE ===================================================== -->
@@ -1102,7 +1200,7 @@ c &amp;= 3 \cdot 10^8 \tfrac{\text{m}}{\text{s}} \\
   </article>
 </section>
 
-<p class="updated">Last updated <span id="last-updated">Tue 27 Oct 2026</span> · built from Classe365 lecture notes and Dr Szilágyi's Drive</p>
+<p class="updated">Last updated <span id="last-updated">Wed 28 Oct 2026</span> · built from Classe365 lecture notes and Dr Szilágyi's Drive</p>
 </div>
 
 <script>
