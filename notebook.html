@@ -1,0 +1,1166 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Kalam:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;-webkit-text-size-adjust:100%}img{max-width:100%}[hidden]{display:none!important}</style>
+</head><body>
+<title>BIC Semester 1 Notebook</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<!--
+  HOW THIS PAGE IS BUILT (for future edits, including the nightly update)
+  - One <section class="subject"> per subject (#algebra, #discrete, #physics).
+  - One <article class="entry"> per lesson, newest at the bottom, with <time datetime="YYYY-MM-DD">.
+  - Maths: <span class="m">TeX</span> inline, <div class="m d">TeX</div> display. KaTeX renders it on load.
+    In TeX write \lt and \gt instead of < and >, and &amp; for alignment &.
+  - Pen colours: class "b" blue = must know, "g" green = answer, "r" red = watch out.
+    <div class="box"> = boxed must-know, <p class="oops"> = watch out.
+  - Homework = <section class="hw"> (dashed box, "Homework (set <date>)" heading): printed questions (<p class="q">), and under each one the
+    handwritten working <div class="w"> with the final answer in <span class="ans">, then a one-line <p class="why"> explaining the rule used.
+    Working starts hidden (class "hw hide-w", button "Show working"). Rejected values in <span class="no">.
+    Handwritten fractions: <span class="fr"><span>top</span><span>bottom</span></span>.
+  - Update the "Notes up to" date in the header and the lesson index chips when adding a lesson.
+-->
+
+<style>
+/* Layout: one white notebook page, a red margin line with lesson dates in the margin, subject tabs on top */
+:root{
+  --paper:#ffffff;
+  --ink:#1e293b;
+  --pencil:#64748b;
+  --rule:#e2e8f0;
+  --margin:#fca5a5;
+  --blue:#1d4ed8;
+  --green:#15803d;
+  --red:#dc2626;
+  --hl:#fde68a;
+    --blue-wash:#dbeafe;
+  --red-wash:#fee2e2;
+  --hand:"Kalam","Segoe Print","Bradley Hand","Comic Sans MS",cursive;
+  --title:"Caveat","Segoe Script","Bradley Hand",cursive;
+  --print:"KaTeX_Main","Times New Roman",Georgia,serif;
+}
+html{background:var(--paper)}
+body{background:var(--paper);color:var(--ink);font-family:var(--hand);font-weight:300;font-size:1.08rem;line-height:1.65;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
+.page{max-width:860px;margin:0 auto;position:relative}
+b,strong{font-weight:700}
+h1,h2,h3{font-family:var(--title);font-weight:700;line-height:1.1;text-wrap:balance;margin:0}
+.top{padding-block:28px 8px;display:grid;gap:10px}
+.top h1{font-size:clamp(2.6rem,7vw,3.6rem);letter-spacing:.5px}
+.top .sub{color:var(--pencil);margin:0;font-size:1rem}
+.key{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;font-family:var(--title);font-size:1.5rem;font-weight:700;margin-top:4px}
+.key .k-b{color:var(--blue);border:2px solid var(--blue);padding:0 10px;border-radius:255px 15px 225px 15px/15px 225px 15px 255px}
+.key .k-g{color:var(--green)}
+.key .k-r{color:var(--red)}
+.key small{font-family:var(--hand);font-weight:300;font-size:.9rem;color:var(--pencil);margin-left:6px}
+
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);display:flex;flex-wrap:wrap;gap:8px;padding-block:12px;border-bottom:2px solid var(--ink)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+nav.tabs button{font-family:var(--title);font-size:1.45rem;font-weight:700;color:var(--pencil);background:transparent;border:2px solid transparent;padding:2px 14px;cursor:pointer;
+  border-radius:255px 15px 225px 15px/15px 225px 15px 255px}
+nav.tabs button[aria-selected="true"]{color:var(--ink);border-color:var(--ink);background:linear-gradient(transparent 55%,var(--hl) 55%)}
+nav.tabs button:focus-visible,.chips button:focus-visible,summary:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+
+.subject{padding-top:18px}
+.subject-head{display:grid;gap:6px;padding-bottom:6px}
+.subject-head h2{font-size:2.4rem}
+.subject-head p{margin:0;color:var(--pencil)}
+.subject-head .sheet-link{margin:2px 0 0}
+.sheet-link a{display:inline-block;font-family:var(--title);font-weight:700;font-size:1.35rem;color:var(--blue);text-decoration:none;border-bottom:2px solid var(--blue);line-height:1.1}
+.sheet-link a:hover{background:var(--blue-wash)}
+.sheet-link a:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.chips{display:flex;flex-wrap:wrap;gap:6px 8px;margin-top:6px}
+.chips button{font-family:var(--hand);font-size:.95rem;color:var(--ink);background:transparent;border:1.5px dashed var(--pencil);border-radius:999px;padding:0 12px;cursor:pointer}
+.chips button:hover{border-style:solid}
+.plan{margin:8px 0 0;color:var(--pencil);font-size:.98rem}
+
+/* entries: margin column with the date, red margin line */
+.entry{display:grid;grid-template-columns:96px minmax(0,1fr);column-gap:22px;padding-block:26px 8px;border-top:1.5px dashed var(--rule);scroll-margin-top:80px}
+.entry .when{grid-column:1;text-align:right;font-family:var(--title);font-weight:700;color:var(--pencil);font-size:1.45rem;line-height:1.05;padding-top:6px}
+.entry .when span{display:block;font-size:1.05rem;font-weight:600}
+.entry .body{grid-column:2;min-width:0;border-left:2px solid var(--margin);padding-left:22px}
+.entry h3{font-size:2.1rem;margin-bottom:2px}
+.entry .lect{margin:0 0 10px;color:var(--pencil);font-size:.98rem}
+.entry h4{font-family:var(--hand);font-weight:700;font-size:1.15rem;margin:22px 0 4px;display:inline-block;
+  background:linear-gradient(transparent 58%,var(--hl) 58%,var(--hl) 92%,transparent 92%);padding:0 3px}
+.entry p{margin:6px 0}
+.entry ul,.entry ol{margin:6px 0;padding-left:24px}
+.entry li{margin:3px 0}
+.entry ul{list-style:none;padding-left:20px}
+.entry ul>li::before{content:"–";position:absolute;margin-left:-18px;color:var(--pencil)}
+.entry ul>li{position:relative}
+
+.b{color:var(--blue)}
+.g{color:var(--green)}
+.r{color:var(--red)}
+.box{border:2px solid var(--blue);color:var(--blue);padding:8px 16px;margin:10px 0;
+  border-radius:255px 15px 225px 15px/15px 225px 15px 255px;overflow-x:auto}
+.box p{margin:4px 0}
+.oops{color:var(--red)}
+.oops::before{content:"Watch out! ";font-family:var(--title);font-weight:700;font-size:1.3rem}
+.m.d{display:block;overflow-x:auto;overflow-y:hidden;padding:4px 0;margin:6px 0}
+.katex{font-size:1.06em}
+.katex-display{margin:.3em 0}
+.entry .steps{counter-reset:s;list-style:none;padding-left:0}
+.entry .steps li{counter-increment:s;padding-left:32px;position:relative;margin:6px 0}
+.entry .steps li::before{content:counter(s);position:absolute;left:0;top:1px;font-family:var(--title);font-weight:700;font-size:1.25rem;color:var(--pencil);
+  border:1.5px solid var(--pencil);border-radius:50%;width:22px;height:22px;line-height:20px;text-align:center}
+
+/* notes vs homework: a "Class notes" heading under the lesson title, a solid rule before the homework */
+.entry .lect::after{content:"Class notes";display:block;margin-top:16px;font-family:var(--title);font-weight:700;font-size:1.55rem;color:var(--ink);line-height:1.1}
+.entry .body > .hw{position:relative;margin-top:58px}
+.entry .body > .hw::before{content:"";position:absolute;left:-23px;right:-1px;top:-30px;border-top:2.5px solid var(--ink)}
+@media (max-width:640px){.entry .body > .hw::before{left:0;right:0}}
+/* homework: same dashed box as the notes; printed questions, handwritten working under each one */
+.hw{margin:24px 0 8px;border:1.5px dashed var(--pencil);padding:10px 18px 6px;border-radius:12px 4px 14px 6px}
+.hw-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 16px}
+.entry .hw-head h4{margin:0;background:none;font-family:var(--title);font-size:1.6rem;padding:0}
+.entry .hw-head h4::before{content:"";display:inline-block;width:14px;height:14px;border:2px solid var(--ink);border-radius:2px;margin-right:8px;transform:rotate(-4deg)}
+.hw-toggle{font-family:var(--hand);font-weight:700;font-size:1rem;color:var(--green);background:none;border:0;padding:0;cursor:pointer}
+.hw-toggle::before{content:"▾ "}
+.hw.hide-w .hw-toggle::before{content:"▸ "}
+.hw-toggle:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.entry .hw-intro{color:var(--pencil);font-size:.98rem;margin:4px 0 0}
+.entry ol.hw-list{list-style:none;margin:6px 0 0;padding:0}
+.entry .hw-list>li{margin:0;padding:12px 0 14px}
+.entry .hw-list>li+li{border-top:1px dotted var(--rule)}
+.qa{min-width:0;display:grid;gap:12px}
+.entry .q{font-family:var(--print);font-weight:400;font-size:1.04rem;line-height:1.55;color:var(--ink);margin:0}
+.entry .q b{font-weight:700;margin-right:4px}
+.sub{min-width:0}
+.w{margin:6px 0 0 4px;padding:2px 0 2px 16px;border-left:2px solid var(--margin);font-family:var(--hand);font-weight:400;font-size:1.06rem;line-height:1.75;color:var(--ink);overflow-x:auto}
+.entry .w p{margin:2px 0}
+.ans{display:inline-block;color:var(--green);font-weight:700;padding:0 8px;margin-top:2px;border:2px solid var(--green);
+  border-radius:255px 15px 225px 15px/15px 225px 15px 255px}
+.no{color:var(--red);font-weight:700}
+.fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.1;margin:0 3px;font-size:.88em}
+.fr>span:last-child{border-top:1.5px solid currentColor;padding-top:1px}
+.entry .w p.why{margin-top:8px;color:var(--pencil);font-weight:300;line-height:1.55}
+.why b{font-family:var(--title);font-weight:700;font-size:1.25rem;color:var(--ink);margin-right:4px}
+.hw.hide-w .w{display:none}
+
+.tbl{overflow-x:auto;margin:8px 0}
+.tbl table{border-collapse:collapse;font-size:1rem}
+.tbl th,.tbl td{border:1.5px solid var(--ink);padding:3px 10px;text-align:center}
+.tbl th{font-weight:700}
+.tbl td.l,.tbl th.l{text-align:left}
+
+figure.sketch{margin:10px 0;display:flex;flex-wrap:wrap;gap:18px;align-items:flex-start}
+figure.sketch svg{max-width:100%;height:auto;overflow:visible}
+figure.sketch figcaption{flex-basis:100%;color:var(--pencil);font-size:.95rem}
+svg text{font-family:var(--hand);font-size:13px;fill:var(--ink)}
+svg .t-b{fill:var(--blue)} svg .t-g{fill:var(--green)} svg .t-r{fill:var(--red)} svg .t-p{fill:var(--pencil)}
+
+.updated{color:var(--pencil);font-size:.92rem;margin-top:30px;text-align:center}
+
+@media (max-width:640px){
+  .entry{grid-template-columns:minmax(0,1fr)}
+  .entry .when{grid-column:1;text-align:left;padding-top:0;margin-bottom:4px}
+  .entry .when span{display:inline;margin-left:6px}
+  .entry .body{grid-column:1;border-left:0;padding-left:0}
+  .entry h3{font-size:1.85rem}
+  nav.tabs button{font-size:1.25rem;padding:1px 10px}
+}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+
+<div class="page">
+<header class="top">
+  <h1>BIC Notebook</h1>
+  <p class="sub">Foundation year · Semester 1 · notes up to <span id="upto">Mon 26 Oct</span></p>
+  <div class="key" aria-label="Colour key">
+    <span><span class="k-b">MUST KNOW</span><small>learn it by heart</small></span>
+    <span><span class="k-g">ANSWER</span><small>worked result</small></span>
+    <span><span class="k-r">WATCH OUT</span><small>common mistake</small></span>
+  </div>
+</header>
+
+<nav class="tabs" role="tablist" aria-label="Subjects">
+  <button role="tab" id="tab-algebra" aria-controls="sec-algebra" aria-selected="true" data-tab="algebra">Algebra</button>
+  <button role="tab" id="tab-discrete" aria-controls="sec-discrete" aria-selected="false" data-tab="discrete">Discrete Maths</button>
+  <button role="tab" id="tab-physics" aria-controls="sec-physics" aria-selected="false" data-tab="physics">Physics 1</button>
+</nav>
+
+<!-- ===================================================== ALGEBRA ===================================================== -->
+<section class="subject" id="sec-algebra" role="tabpanel" aria-labelledby="tab-algebra">
+  <div class="subject-head">
+    <h2>College Algebra</h2>
+    <p>Dr István Vajda · Mon 08:30 and Wed 13:45</p>
+    <p class="sheet-link"><a href="https://claude.ai/artifact/TqBPCzkXpGKkTPXHiDPLbx" target="_blank" rel="noopener">Open the cheat sheet →</a></p>
+    <div class="chips">
+      <button data-go="alg-12-oct">Mon 12 Oct · Real numbers</button>
+      <button data-go="alg-14-oct">Wed 14 Oct · Factorising, |x|</button>
+      <button data-go="alg-19-oct">Mon 19 Oct · Fractions, division</button>
+      <button data-go="alg-21-oct">Wed 21 Oct · Word problems, systems</button>
+      <button data-go="alg-26-oct">Mon 26 Oct · |x| functions, rational eq.</button>
+    </div>
+  </div>
+
+  <!-- ALG 12 OCT -->
+  <article class="entry" id="alg-12-oct">
+    <div class="when"><time datetime="2026-10-12">Mon<span>12 Oct</span></time></div>
+    <div class="body">
+      <h3>Real numbers</h3>
+      <p class="lect">L1 Course requirements · L2 Real numbers</p>
+
+      <h4>Order of operations</h4>
+      <p>brackets → powers → × and ÷ (left to right) → + and − (left to right)</p>
+      <div class="m d">12 + 3 \cdot 5 = 12 + 15 = \textcolor{#15803d}{27}</div>
+
+      <h4>Even or odd?</h4>
+      <ul>
+        <li>A product is odd only if <b>every</b> factor is odd. So <span class="m">1 \cdot 2 \cdot 3 \cdots 100 = 100!</span> is even.</li>
+        <li><span class="m">(-99)(-98)\cdots 99 = 0</span> because 0 is one of the factors, so it's even.</li>
+        <li>A sum is odd only if it has an <b>odd number of odd terms</b>.</li>
+      </ul>
+      <p>Gauss's trick for <span class="m">1 + 2 + \dots + 100</span>: pair the first and last terms.</p>
+      <div class="m d">(1 + 100) + (2 + 99) + \dots = 101 \cdot 50 = \textcolor{#15803d}{5050}</div>
+      <div class="box"><div class="m d">1 + 2 + \dots + n = \frac{n(n+1)}{2} \qquad\qquad 1 + 3 + 5 + \dots + (2n-1) = n^2</div></div>
+
+      <h4>Laws of real numbers (boxed in class)</h4>
+      <div class="box"><div class="m d">\begin{aligned} a + b &amp;= b + a &amp; ab &amp;= ba &amp;&amp; \text{commutative} \\ (a + b) + c &amp;= a + (b + c) &amp; (ab)c &amp;= a(bc) &amp;&amp; \text{associative} \\ (a + b)\,c &amp;= ac + bc &amp;&amp; &amp;&amp; \text{distributive} \end{aligned}</div></div>
+      <p class="oops"><span class="m">a - b \neq b - a</span> and <span class="m">\frac{a}{b} \neq \frac{b}{a}</span>. Order matters for − and ÷.</p>
+
+      <h4>Number sets</h4>
+      <div class="box"><div class="m d">\mathbb{N} = \{0, 1, 2, 3, \dots\} \subset \mathbb{Z} \subset \mathbb{Q} \subset \mathbb{R}</div></div>
+      <ul>
+        <li><b>Rational</b> <span class="m">\mathbb{Q}</span>: can be written <span class="m">\frac{p}{q}</span> with <span class="m">p, q \in \mathbb{Z},\ q \neq 0</span>. The decimal ends or repeats: <span class="m">\tfrac12,\ -\tfrac23,\ 2.25</span>.</li>
+        <li><b>Irrational</b> <span class="m">\mathbb{R} \setminus \mathbb{Q}</span>: the decimal never ends and never repeats.
+          <ul>
+            <li>algebraic (a root of a polynomial): <span class="m">\sqrt2,\ -\sqrt3,\ \frac{1+\sqrt5}{2}</span></li>
+            <li>transcendental: <span class="m">\pi,\ e,\ -2\pi</span></li>
+          </ul>
+        </li>
+      </ul>
+
+      <h4>Proof: √2 is irrational (proof by contradiction)</h4>
+      <ol class="steps">
+        <li>Assume <span class="m">\sqrt2 = \frac{p}{q}</span> with <span class="m">p, q \in \mathbb{Z}</span>, and the fraction can't be simplified.</li>
+        <li>Square it: <span class="m">2q^2 = p^2</span>, so <span class="m">p^2</span> is even, so <span class="m">p</span> is even: <span class="m">p = 2r</span>.</li>
+        <li>Then <span class="m">2q^2 = 4r^2 \Rightarrow q^2 = 2r^2</span>, so <span class="m">q</span> is even too.</li>
+        <li>Both even means <span class="m">\frac{p}{q}</span> could be simplified. <span class="r"><b>Contradiction ↯</b></span></li>
+      </ol>
+
+      <h4>Rational and irrational</h4>
+      <ul>
+        <li><span class="m">r = \frac{a}{b},\ s = \frac{c}{d}</span> rational ⇒ <span class="m">r + s = \frac{ad + bc}{bd}</span> is rational. Same for <span class="m">r - s,\ rs,\ \frac{r}{s}\ (s \neq 0)</span>.</li>
+        <li><span class="m">r</span> rational, <span class="m">t</span> irrational ⇒ <span class="m">r + t</span> is irrational. (If <span class="m">r + t = s</span> were rational, then <span class="m">t = s - r</span> would be rational.)</li>
+        <li><span class="m">rt</span> is irrational, unless <span class="m">r = 0</span>.</li>
+      </ul>
+
+      <h4>Identities card</h4>
+      <p>Left to right = expand. Right to left = factorise.</p>
+      <div class="box"><div class="m d">\begin{aligned}
+(a+b)^2 &amp;= a^2 + 2ab + b^2 &amp; (a-b)^2 &amp;= a^2 - 2ab + b^2 \\
+(a+b)(a-b) &amp;= a^2 - b^2 &amp; (x+a)(x+b) &amp;= x^2 + (a+b)x + ab \\
+(a+b)^3 &amp;= a^3 + b^3 + 3a^2b + 3ab^2 &amp; (a-b)^3 &amp;= a^3 - b^3 - 3a^2b + 3ab^2 \\
+a^3 + b^3 &amp;= (a+b)(a^2 - ab + b^2) &amp; a^3 - b^3 &amp;= (a-b)(a^2 + ab + b^2) \\
+(a+b+c)^2 &amp;= a^2 + b^2 + c^2 + 2ab + 2bc + 2ca \\
+(a+b-c)^2 &amp;= a^2 + b^2 + c^2 + 2ab - 2bc - 2ca \\
+(a-b-c)^2 &amp;= a^2 + b^2 + c^2 - 2ab + 2bc - 2ca
+\end{aligned}</div></div>
+
+      <h4>Factorising and expanding (done in class)</h4>
+      <div class="m d">\begin{aligned}
+9a + 9b &amp;= \textcolor{#15803d}{9(a + b)} \\
+6u^2v^2 - 3u^2v &amp;= \textcolor{#15803d}{3u^2v(2v - 1)} \\
+(x + 1) + x(x + 1) &amp;= (x + 1)(1 + x) = \textcolor{#15803d}{(x + 1)^2} \\
+(2a - 7)(2a + 7) &amp;= \textcolor{#15803d}{4a^2 - 49} \\
+49x^2y^2 - 144a^2b^2 &amp;= \textcolor{#15803d}{(7xy - 12ab)(7xy + 12ab)}
+\end{aligned}</div>
+      <p>Quadratic with the discriminant, <span class="m">a^2 + 5a + 6</span>:</p>
+      <div class="m d">\Delta = 25 - 24 = 1 \qquad a_{1,2} = \frac{-5 \pm 1}{2} = -2 \ \text{or}\ -3 \qquad \Rightarrow \qquad \textcolor{#15803d}{(a + 2)(a + 3)}</div>
+
+      <section class="hw hide-w" aria-label="Homework set Mon 12 Oct">
+        <div class="hw-head"><h4>Homework (Mon 12 Oct)</h4><button type="button" class="hw-toggle" aria-pressed="true">Show working</button></div>
+        <ol class="hw-list">
+        <li><div class="qa">
+          <p class="q">Work out. (Ex 1)</p>
+          <div class="sub"><p class="q"><b>c)</b> <span class="m">8 \cdot 3 + 2 \cdot 3 \cdot 5 - 12 \div 2 - 11</span></p>
+            <div class="w"><p>× and ÷ first: 24 + 30 − 6 − 11</p><p>= <span class="ans">37</span></p><p class="why"><b>Why?</b> × and ÷ always come before + and −, even when they come later in the line.</p></div></div>
+          <div class="sub"><p class="q"><b>d)</b> <span class="m">65 - (2 + 4) \cdot 15 \div 10 + 4 \cdot 3</span></p>
+            <div class="w"><p>brackets first: 65 − 6 · 15 ÷ 10 + 4 · 3</p><p>= 65 − 90 ÷ 10 + 12 = 65 − 9 + 12 = <span class="ans">68</span></p><p class="why"><b>Why?</b> Brackets first, then × and ÷ from left to right, then + and −.</p></div></div>
+        </div></li>
+        <li><div class="qa">
+          <p class="q">Even or odd? (Ex 2)</p>
+          <div class="sub"><p class="q"><b>f)</b> <span class="m">1 + 2 + \dots + 99</span></p>
+            <div class="w"><p>Gauss: <span class="fr"><span>99 · 100</span><span>2</span></span> = 4950 → <span class="ans">even</span></p><p class="why"><b>Why?</b> Gauss's trick pairs the first and last terms (1 + 99 = 100), which gives n(n + 1)/2. 4950 ends in 0, so it's even.</p></div></div>
+          <div class="sub"><p class="q"><b>g)</b> <span class="m">1 + 3 + 5 + \dots + 99</span></p>
+            <div class="w"><p>50 odd numbers, so the sum is 50² = 2500 → <span class="ans">even</span></p><p class="why"><b>Why?</b> The first n odd numbers always add up to n². From 1 to 99 there are 50 odd numbers. An even count of odd terms gives an even sum.</p></div></div>
+          <div class="sub"><p class="q"><b>h)</b> <span class="m">(-99) + (-98) + \dots + 99</span></p>
+            <div class="w"><p>−99 and 99 cancel, −98 and 98 cancel, … so the total is 0 → <span class="ans">even</span></p><p class="why"><b>Why?</b> Every negative number has a matching positive one, so they cancel in pairs and only 0 is left. 0 is even.</p></div></div>
+        </div></li>
+        <li><div class="qa">
+          <div class="sub"><p class="q">What is 35% of 240? (multiple choice)</p>
+            <div class="w"><p><span class="fr"><span>35</span><span>100</span></span> · 240 = 0.35 · 240 = <span class="ans">84 (B)</span></p><p class="why"><b>Why?</b> Percent means "out of 100", so 35% = 0.35, and "of" means multiply.</p></div></div>
+        </div></li>
+        <li><div class="qa">
+          <div class="sub"><p class="q">One student scored 9 marks more than the other, and his marks were 56% of their total. Find both marks. (multiple choice)</p>
+            <div class="w"><p>let x = lower mark, y = higher mark</p><p>y = x + 9 &nbsp;and&nbsp; y = 0.56(x + y)</p><p>y = 0.56x + 0.56y ⇒ 0.44y = 0.56x ⇒ 11y = 14x</p><p>11(x + 9) = 14x ⇒ 99 = 3x ⇒ x = 33, y = 42</p><p><span class="ans">42 and 33 (C)</span></p><p class="why"><b>Why?</b> Two unknowns need two equations: one from "9 more", one from "56% of their total". Then substitute one into the other.</p></div></div>
+        </div></li>
+        <li><div class="qa">
+          <p class="q">Factorise. (Ex 2 and Ex 7)</p>
+          <div class="sub"><p class="q"><b>Ex 2 c)</b> <span class="m">28x - 24y</span></p>
+            <div class="w"><p>common factor 4 → <span class="ans">4(7x − 6y)</span></p><p class="why"><b>Why?</b> Find the biggest number that divides every term (4 divides 28 and 24) and take it out. Expand back to check.</p></div></div>
+          <div class="sub"><p class="q"><b>Ex 2 d)</b> <span class="m">13p + 39q</span></p>
+            <div class="w"><p>common factor 13 → <span class="ans">13(p + 3q)</span></p><p class="why"><b>Why?</b> 39 = 3 · 13, so 13 divides both terms.</p></div></div>
+          <div class="sub"><p class="q"><b>Ex 2 e)</b> <span class="m">pr + qr</span></p>
+            <div class="w"><p>common factor r → <span class="ans">r(p + q)</span></p><p class="why"><b>Why?</b> r is in both terms, so it comes out just like a number would.</p></div></div>
+          <div class="sub"><p class="q"><b>Ex 2 f)</b> <span class="m">x^2 + xy</span></p>
+            <div class="w"><p>common factor x → <span class="ans">x(x + y)</span></p><p class="why"><b>Why?</b> x² = x · x, so x is in both terms.</p></div></div>
+          <div class="sub"><p class="q"><b>Ex 2 g)</b> <span class="m">a^2b + ab^2</span></p>
+            <div class="w"><p>common factor ab → <span class="ans">ab(a + b)</span></p><p class="why"><b>Why?</b> a²b = ab · a and ab² = ab · b, so ab is in both terms.</p></div></div>
+          <div class="sub"><p class="q"><b>Ex 7 b)</b> <span class="m">2x^2 + 3x + 1</span></p>
+            <div class="w"><p>Δ = 9 − 8 = 1 → x₁,₂ = <span class="fr"><span>−3 ± 1</span><span>4</span></span> = −½ or −1</p><p>2(x + ½)(x + 1) = <span class="ans">(2x + 1)(x + 1)</span></p><p class="why"><b>Why?</b> The roots give the factors: ax² + bx + c = a(x − x₁)(x − x₂). Here a = 2, and the 2 is multiplied into the first bracket.</p></div></div>
+        </div></li>
+        </ol>
+      </section>
+    </div>
+  </article>
+
+  <!-- ALG 14 OCT -->
+  <article class="entry" id="alg-14-oct">
+    <div class="when"><time datetime="2026-10-14">Wed<span>14 Oct</span></time></div>
+    <div class="body">
+      <h3>Factorising · Absolute value</h3>
+      <p class="lect">L3 Factorisation · L4 Absolute value of real numbers</p>
+
+      <h4>Why the identities are true</h4>
+      <div class="m d">(a + b)^2 = (a + b)(a + b) = a^2 + ab + ba + b^2 = a^2 + 2ab + b^2</div>
+      <figure class="sketch">
+        <svg width="190" height="190" viewBox="0 0 190 190" role="img" aria-label="A square of side a plus b split into a squared, two ab rectangles and b squared">
+          <rect x="20" y="20" width="160" height="160" fill="none" stroke="#1e293b" stroke-width="2"/>
+          <line x1="120" y1="20" x2="120" y2="180" stroke="#1e293b" stroke-width="1.5"/>
+          <line x1="20" y1="120" x2="180" y2="120" stroke="#1e293b" stroke-width="1.5"/>
+          <rect x="120" y="20" width="60" height="100" fill="#dbeafe" opacity=".7"/>
+          <rect x="20" y="120" width="100" height="60" fill="#dbeafe" opacity=".7"/>
+          <text x="62" y="76" style="font-size:17px">a²</text>
+          <text x="140" y="76" class="t-b" style="font-size:17px">ab</text>
+          <text x="58" y="156" class="t-b" style="font-size:17px">ab</text>
+          <text x="141" y="156" style="font-size:17px">b²</text>
+          <text x="66" y="13" class="t-p">a</text><text x="147" y="13" class="t-p">b</text>
+          <text x="6" y="74" class="t-p">a</text><text x="6" y="155" class="t-p">b</text>
+        </svg>
+        <figcaption>Area proof: a square of side a + b splits into a², ab, ab and b².</figcaption>
+      </figure>
+      <p>Check <span class="m">a^3 - b^3</span> by expanding. The middle terms cancel:</p>
+      <div class="m d">(a - b)(a^2 + ab + b^2) = a^3 + \cancel{a^2b} + \bcancel{ab^2} - \cancel{a^2b} - \bcancel{ab^2} - b^3 = a^3 - b^3</div>
+
+      <h4>Common bracket</h4>
+      <div class="m d">m^2(n + 1) + 2m(n + 1) = (n + 1)(m^2 + 2m) = \textcolor{#15803d}{(n + 1)\, m\, (m + 2)}</div>
+
+      <h4>Word problem (Ex 6)</h4>
+      <p>A rectangle has sides <span class="m">x + 3</span> and <span class="m">x - 3</span> and area 55 m².</p>
+      <div class="m d">(x + 3)(x - 3) = 55 \Rightarrow x^2 - 9 = 55 \Rightarrow x^2 = 64 \Rightarrow x = 8</div>
+      <p>Sides 11 and 5, so <span class="m">P = 2(11 + 5) = </span><span class="g"><b>32 m</b></span>. (A length can't be −8.)</p>
+
+      <h4>Sum and difference of cubes</h4>
+      <div class="box"><div class="m d">a^3 + b^3 = (a + b)(a^2 \textcolor{#dc2626}{-} ab + b^2) \qquad\qquad a^3 - b^3 = (a - b)(a^2 \textcolor{#dc2626}{+} ab + b^2)</div></div>
+      <div class="m d">\begin{aligned}
+x^3 - 27 &amp;= \textcolor{#15803d}{(x - 3)(x^2 + 3x + 9)} \\
+64 + q^3 &amp;= \textcolor{#15803d}{(4 + q)(16 - 4q + q^2)} \\
+2x^3 + 16 = 2(x^3 + 8) &amp;= \textcolor{#15803d}{2(x + 2)(x^2 - 2x + 4)} \\
+x^3y^3 + z^6 = (xy)^3 + (z^2)^3 &amp;= \textcolor{#15803d}{(xy + z^2)(x^2y^2 - xyz^2 + z^4)}
+\end{aligned}</div>
+
+      <h4>Quadratics: two ways</h4>
+      <p>Factorise <span class="m">a^2 + 3ab + 2b^2</span>.</p>
+      <ol class="steps">
+        <li><b>Split the middle term:</b> <span class="m">a^2 + ab + 2ab + 2b^2 = a(a + b) + 2b(a + b) = </span><span class="g"><span class="m">(a + b)(a + 2b)</span></span></li>
+        <li><b>Formula</b> (a quadratic in <span class="m">a</span>): <span class="m">a_{1,2} = \frac{-3b \pm \sqrt{9b^2 - 8b^2}}{2} = \frac{-3b \pm b}{2} = -b \ \text{or}\ -2b</span></li>
+      </ol>
+      <div class="box"><div class="m d">ax^2 + bx + c \text{ has roots } x_1, x_2 \ \Rightarrow\ ax^2 + bx + c = a(x - x_1)(x - x_2)</div></div>
+
+      <h4>Substitution trick</h4>
+      <div class="m d">x^6 + 4x^3 + 4: \quad y = x^3 \ \Rightarrow\ y^2 + 4y + 4 = (y + 2)^2 = \textcolor{#15803d}{(x^3 + 2)^2}</div>
+
+      <h4>Absolute value</h4>
+      <div class="box"><div class="m d">|a| = \begin{cases} a &amp; \text{if } a \ge 0 \\ -a &amp; \text{if } a \lt 0 \end{cases}</div><p>It's the distance from 0, so it's never negative: <span class="m">|-3| = 3,\ |3| = 3</span>.</p></div>
+      <p>The graph of <span class="m">|x|</span> is a V: the line <span class="m">y = x</span> for <span class="m">x \ge 0</span> and <span class="m">y = -x</span> for <span class="m">x \lt 0</span>.</p>
+      <ul>
+        <li><span class="m">|x - c|</span> moves right by c, <span class="m">|x + c|</span> moves left by c</li>
+        <li><span class="m">|x| + c</span> moves up by c, <span class="m">-|x|</span> flips it upside down</li>
+        <li><span class="m">|x| - 2</span>: vertex <span class="m">(0, -2)</span>, crosses the x-axis at ±2</li>
+      </ul>
+
+      <h4>Solving</h4>
+      <div class="m d">\begin{aligned}
+|x| = 7 &amp;\Rightarrow \textcolor{#15803d}{x = -7 \ \text{or}\ 7} \\
+|2x - 10| = 4 &amp;\Rightarrow 2x - 10 = -4 \ \text{or}\ 4 \Rightarrow \textcolor{#15803d}{x = 3 \ \text{or}\ 7} \\
+|12 - 3x| = 4 &amp;\Rightarrow 12 - 3x = -4 \ \text{or}\ 4 \Rightarrow \textcolor{#15803d}{x = \tfrac{16}{3} \ \text{or}\ \tfrac{8}{3}}
+\end{aligned}</div>
+      <p>Same answers from <span class="m">|3x - 12| = 4</span>, because <span class="m">|a - b| = |b - a|</span>.</p>
+      <p class="oops"><span class="m">|x + 11| = -2</span> has no solution. An absolute value is never negative.</p>
+
+      <h4>Harder ones (Ex 2)</h4>
+      <div class="m d">\begin{aligned}
+3|x| + 1 = |x| + 7 &amp;\Rightarrow 2|x| = 6 \Rightarrow |x| = 3 \Rightarrow \textcolor{#15803d}{x = \pm 3} \\
+|x + 1| = |x - 2| &amp;\Rightarrow x + 1 = -(x - 2) \Rightarrow 2x = 1 \Rightarrow \textcolor{#15803d}{x = \tfrac12}
+\end{aligned}</div>
+      <p>(The other case, <span class="m">x + 1 = x - 2</span>, is impossible.)</p>
+
+      <h4>Word problem (Ex 4)</h4>
+      <p>One number exceeds another by 17 and their sum is 31: <span class="m">x + 17 + x = 31 \Rightarrow x = 7</span>, so the numbers are <span class="g"><b>24 and 7</b></span>.</p>
+
+      <section class="hw hide-w" aria-label="Homework set Wed 14 Oct">
+        <div class="hw-head"><h4>Homework (Wed 14 Oct)</h4><button type="button" class="hw-toggle" aria-pressed="true">Show working</button></div>
+        <ol class="hw-list">
+        <li><div class="qa">
+          <p class="q">Factorise. (Ex 5)</p>
+          <div class="sub"><p class="q"><b>b)</b> <span class="m">y(a - y) - y^2(a - y)</span></p>
+            <div class="w"><p>common bracket (a − y): (a − y)(y − y²)</p><p>= <span class="ans">y(a − y)(1 − y)</span></p><p class="why"><b>Why?</b> Both parts contain the same bracket (a − y), so it comes out like a common factor. What's left, y − y², still has a common factor y.</p></div></div>
+          <div class="sub"><p class="q"><b>d)</b> <span class="m">a(a - 1) - (a - 1)</span></p>
+            <div class="w"><p>common bracket (a − 1): (a − 1)(a − 1) = <span class="ans">(a − 1)²</span></p><p class="why"><b>Why?</b> (a − 1) is the same as 1 · (a − 1), so taking it out leaves a − 1 again.</p></div></div>
+        </div></li>
+        <li><div class="qa">
+          <p class="q">Factorise. (Ex 7)</p>
+          <div class="sub"><p class="q"><b>c)</b> <span class="m">12y^2 + 13y - 35</span></p>
+            <div class="w"><p>a · c = −420 → 28 and −15 (multiply to −420, add to 13)</p><p>12y² + 28y − 15y − 35 = 4y(3y + 7) − 5(3y + 7)</p><p>= <span class="ans">(3y + 7)(4y − 5)</span></p><p class="why"><b>Why?</b> Split the middle term: two numbers that multiply to a · c and add to b. Grouping in pairs then gives a common bracket.</p></div></div>
+          <div class="sub"><p class="q"><b>d)</b> <span class="m">8 - p^3</span></p>
+            <div class="w"><p>2³ − p³, difference of cubes</p><p>= <span class="ans">(2 − p)(4 + 2p + p²)</span></p><p class="why"><b>Why?</b> 8 = 2³, so it's a difference of cubes a³ − b³ = (a − b)(a² + ab + b²) with a = 2, b = p.</p></div></div>
+          <div class="sub"><p class="q"><b>e)</b> <span class="m">a^2 + b^2 + 2ab - 2a - 2b - 3</span></p>
+            <div class="w"><p>= (a + b)² − 2(a + b) − 3, &nbsp;let u = a + b</p><p>u² − 2u − 3 = (u − 3)(u + 1) = <span class="ans">(a + b − 3)(a + b + 1)</span></p><p class="why"><b>Why?</b> The first three terms are (a + b)² and the next two are −2(a + b). Calling a + b one letter u turns it into an ordinary quadratic.</p></div></div>
+          <div class="sub"><p class="q"><b>f)</b> <span class="m">125x^3 - 8y^3</span></p>
+            <div class="w"><p>(5x)³ − (2y)³, difference of cubes</p><p>= <span class="ans">(5x − 2y)(25x² + 10xy + 4y²)</span></p><p class="why"><b>Why?</b> 125 = 5³ and 8 = 2³, so both terms are cubes. Use a³ − b³ with a = 5x, b = 2y.</p></div></div>
+        </div></li>
+        <li><div class="qa">
+          <p class="q">Factorise. (Ex 8)</p>
+          <div class="sub"><p class="q"><b>c)</b> <span class="m">3x^3 - 81y^3</span></p>
+            <div class="w"><p>3(x³ − 27y³) = 3(x³ − (3y)³)</p><p>= <span class="ans">3(x − 3y)(x² + 3xy + 9y²)</span></p><p class="why"><b>Why?</b> Take the common factor 3 out first. Then 27y³ = (3y)³ is a cube.</p></div></div>
+          <div class="sub"><p class="q"><b>e)</b> <span class="m">a^6 - 216b^9</span></p>
+            <div class="w"><p>(a²)³ − (6b³)³</p><p>= <span class="ans">(a² − 6b³)(a⁴ + 6a²b³ + 36b⁶)</span></p><p class="why"><b>Why?</b> a⁶ = (a²)³ and 216b⁹ = (6b³)³, because 6³ = 216 and (b³)³ = b⁹.</p></div></div>
+          <div class="sub"><p class="q"><b>g)</b> <span class="m">8x^2 + 2x - 15</span></p>
+            <div class="w"><p>a · c = −120 → 12 and −10</p><p>8x² + 12x − 10x − 15 = 4x(2x + 3) − 5(2x + 3)</p><p>= <span class="ans">(2x + 3)(4x − 5)</span></p><p class="why"><b>Why?</b> Same split-the-middle method: 12 · (−10) = −120 = a · c and 12 + (−10) = 2 = b.</p></div></div>
+          <div class="sub"><p class="q"><b>k)</b> <span class="m">x^4 - 10x^2 + 9</span></p>
+            <div class="w"><p>let y = x²: y² − 10y + 9 = (y − 1)(y − 9) = (x² − 1)(x² − 9)</p><p>= <span class="ans">(x − 1)(x + 1)(x − 3)(x + 3)</span></p><p class="why"><b>Why?</b> Powers 4 and 2 mean it's a quadratic in x². Each bracket you get is a difference of squares, so it splits again.</p></div></div>
+        </div></li>
+        <li><div class="qa">
+          <p class="q">Draw the graph. Give the domain and range. (Ex 1)</p>
+          <div class="sub"><p class="q"><b>d)</b> <span class="m">x \mapsto -|x|</span></p>
+            <div class="w"><p>the V of |x| flipped upside down, vertex (0, 0)</p><p><span class="ans">D = ℝ, R = ]−∞, 0]</span></p><p class="why"><b>Why?</b> The minus in front flips the V upside down, so the top point is 0 and every other value is below it.</p></div></div>
+          <div class="sub"><p class="q"><b>e)</b> <span class="m">x \mapsto -|x - 4|</span></p>
+            <div class="w"><p>moved right 4, then flipped, vertex (4, 0)</p><p><span class="ans">D = ℝ, R = ]−∞, 0]</span></p><p class="why"><b>Why?</b> The −4 inside moves the V right by 4 (it's 0 at x = 4). The minus outside flips it, so the values are still ≤ 0.</p></div></div>
+          <div class="sub"><p class="q"><b>f)</b> <span class="m">x \mapsto |x + 1|</span></p>
+            <div class="w"><p>moved left 1, vertex (−1, 0)</p><p><span class="ans">D = ℝ, R = [0, +∞[</span></p><p class="why"><b>Why?</b> +1 inside moves the V left by 1. No minus outside, so it opens up and the lowest value is 0.</p></div></div>
+        </div></li>
+        <li><div class="qa">
+          <p class="q">Solve. (Ex 1)</p>
+          <div class="sub"><p class="q"><b>b)</b> <span class="m">|x - 2| = 4</span></p>
+            <div class="w"><p>x − 2 = 4 or x − 2 = −4</p><p><span class="ans">x = 6 or x = −2</span></p><p class="why"><b>Why?</b> |X| = 4 means X is 4 away from 0, so X is 4 or −4. Solve both.</p></div></div>
+          <div class="sub"><p class="q"><b>c)</b> <span class="m">|x + 5| = 1</span></p>
+            <div class="w"><p>x + 5 = 1 or x + 5 = −1</p><p><span class="ans">x = −4 or x = −6</span></p><p class="why"><b>Why?</b> Same idea: the inside is 1 or −1.</p></div></div>
+          <div class="sub"><p class="q"><b>e)</b> <span class="m">|3 - x| = 5</span></p>
+            <div class="w"><p>3 − x = 5 or 3 − x = −5</p><p><span class="ans">x = −2 or x = 8</span></p><p class="why"><b>Why?</b> Same idea: the inside, 3 − x, is 5 or −5. Solve each one for x.</p></div></div>
+          <div class="sub"><p class="q"><b>f)</b> <span class="m">|-x + 11| = 3</span></p>
+            <div class="w"><p>−x + 11 = 3 or −x + 11 = −3</p><p><span class="ans">x = 8 or x = 14</span></p><p class="why"><b>Why?</b> Same idea: −x + 11 is 3 or −3.</p></div></div>
+          <div class="sub"><p class="q"><b>h)</b> <span class="m">|3x + 4| = 6</span></p>
+            <div class="w"><p>3x + 4 = 6 → x = <span class="fr"><span>2</span><span>3</span></span> &nbsp;&nbsp; 3x + 4 = −6 → x = −<span class="fr"><span>10</span><span>3</span></span></p><p><span class="ans">x = ⅔ or x = −10/3</span></p><p class="why"><b>Why?</b> Same idea: 3x + 4 is 6 or −6, then divide by 3.</p></div></div>
+          <div class="sub"><p class="q"><b>i)</b> <span class="m">|12 - 3x| = 4</span></p>
+            <div class="w"><p>12 − 3x = 4 → x = <span class="fr"><span>8</span><span>3</span></span> &nbsp;&nbsp; 12 − 3x = −4 → x = <span class="fr"><span>16</span><span>3</span></span></p><p><span class="ans">x = 8/3 or x = 16/3</span></p><p class="why"><b>Why?</b> Same idea: 12 − 3x is 4 or −4.</p></div></div>
+        </div></li>
+        </ol>
+      </section>
+    </div>
+  </article>
+
+  <!-- ALG 19 OCT -->
+  <article class="entry" id="alg-19-oct">
+    <div class="when"><time datetime="2026-10-19">Mon<span>19 Oct</span></time></div>
+    <div class="body">
+      <h3>Fractions · Polynomial division</h3>
+      <p class="lect">L5 Simplification of fractions · L6 Operations with rational fractions</p>
+
+      <h4>Tricks from the homework review</h4>
+      <div class="m d">\begin{aligned}
+\left(p - \tfrac{1}{p}\right)^2 &amp;= p^2 - 2 + \tfrac{1}{p^2} \qquad (\text{middle: } 2 \cdot p \cdot \tfrac1p = 2) \\
+\left(a^2b + \tfrac{1}{ab^2}\right)^2 &amp;= a^4b^2 + \tfrac{2a}{b} + \tfrac{1}{a^2b^4} \\
+a^2 - \tfrac{b^2}{4} &amp;= \left(a + \tfrac{b}{2}\right)\left(a - \tfrac{b}{2}\right) \\
+5x^3 + 10x^2 - 40x &amp;= 5x(x^2 + 2x - 8) = \textcolor{#15803d}{5x(x + 4)(x - 2)}
+\end{aligned}</div>
+      <p><b>Classic trick:</b> if <span class="m">b + \frac1b = 6</span>, find <span class="m">b^2 + \frac{1}{b^2}</span>. Square both sides:</p>
+      <div class="m d">b^2 + 2 + \frac{1}{b^2} = 36 \ \Rightarrow\ \textcolor{#15803d}{b^2 + \frac{1}{b^2} = 34}</div>
+
+      <h4>Simplifying fractions</h4>
+      <div class="box"><p>Factorise the top and the bottom first, then cancel <b>factors</b>.</p></div>
+      <div class="m d">\begin{aligned}
+\frac{a^2 - 6a + 9}{a^2 - 9} &amp;= \frac{(a - 3)^2}{(a - 3)(a + 3)} = \textcolor{#15803d}{\frac{a - 3}{a + 3}} \\[4pt]
+\frac{a - b}{a^2 - b^2} &amp;= \frac{a - b}{(a - b)(a + b)} = \textcolor{#15803d}{\frac{1}{a + b}} \\[4pt]
+\frac{c^2 - d^2}{cx - dx} &amp;= \frac{(c - d)(c + d)}{x(c - d)} = \textcolor{#15803d}{\frac{c + d}{x}} \\[4pt]
+\frac{3x^2 - 3y^2}{2x^2 - 4xy + 2y^2} &amp;= \frac{3(x - y)(x + y)}{2(x - y)^2} = \textcolor{#15803d}{\frac{3(x + y)}{2(x - y)}}
+\end{aligned}</div>
+      <p class="oops">You can't cancel single terms: <span class="m">\frac{a + 2}{2} \neq a + 1</span>.</p>
+
+      <h4>Polynomial long division</h4>
+      <p>From <span class="m">216 \div 18 = 12</span>: dividend, divisor, quotient, remainder.</p>
+      <div class="box"><div class="m d">P(x) = D(x) \cdot Q(x) + R(x)</div></div>
+      <p><b>Ex 1 a)</b> <span class="m">(6x^2 - 26x + 12) \div (x - 4)</span></p>
+      <ol class="steps">
+        <li><span class="m">6x^2 \div x = 6x</span>. Subtract <span class="m">6x(x - 4) = 6x^2 - 24x</span>, leaving <span class="m">-2x + 12</span>.</li>
+        <li><span class="m">-2x \div x = -2</span>. Subtract <span class="m">-2(x - 4) = -2x + 8</span>, leaving <span class="m">4</span>.</li>
+      </ol>
+      <div class="m d">\textcolor{#15803d}{Q(x) = 6x - 2, \quad R = 4} \qquad \text{check: } (6x - 2)(x - 4) + 4 = 6x^2 - 26x + 12 \ \checkmark</div>
+      <p class="oops">Write <span class="m">0</span> for any missing power, e.g. <span class="m">0x^2</span> in <span class="m">3x^5 + 5x^4 - 4x^3 + 0x^2 + 7x + 3</span>.</p>
+
+      <h4>Horner's method (dividing by x − c)</h4>
+      <p>Bring the first coefficient down, multiply by c, add to the next one, repeat. The last number is the remainder. For <span class="m">x + 2</span>, use <span class="m">c = -2</span>.</p>
+      <p><b>Ex 1 d)</b> <span class="m">(3x^5 + 5x^4 - 4x^3 + 7x + 3) \div (x + 2)</span></p>
+      <div class="m d">\begin{array}{c|ccccc|c}
+ &amp; 3 &amp; 5 &amp; -4 &amp; 0 &amp; 7 &amp; 3 \\
+-2 &amp; &amp; -6 &amp; 2 &amp; 4 &amp; -8 &amp; 2 \\ \hline
+ &amp; \textcolor{#15803d}{3} &amp; \textcolor{#15803d}{-1} &amp; \textcolor{#15803d}{-2} &amp; \textcolor{#15803d}{4} &amp; \textcolor{#15803d}{-1} &amp; \textcolor{#15803d}{5}
+\end{array} \qquad \Rightarrow \qquad \textcolor{#15803d}{Q(x) = 3x^4 - x^3 - 2x^2 + 4x - 1, \quad R = 5}</div>
+
+      <h4>Multiplying and dividing</h4>
+      <p>Cancel before you multiply. Dividing = multiplying by the reciprocal.</p>
+      <div class="m d">\begin{aligned}
+\frac{4y}{9x} \cdot \frac{6x^2}{16y^3} &amp;= \textcolor{#15803d}{\frac{x}{6y^2}} \\[4pt]
+\frac{27x^3y}{72xy^3} \div \frac{15y^2}{16x} = \frac{27x^3y}{72xy^3} \cdot \frac{16x}{15y^2} &amp;= \textcolor{#15803d}{\frac{2x^3}{5y^4}}
+\end{aligned}</div>
+
+      <h4>Adding and subtracting</h4>
+      <p>Find the common denominator by factorising.</p>
+      <div class="m d">\frac{3}{a - b} - \frac{6b}{a^2 - b^2} = \frac{3(a + b) - 6b}{(a - b)(a + b)} = \frac{3(a - b)}{(a - b)(a + b)} = \textcolor{#15803d}{\frac{3}{a + b}}</div>
+
+      <section class="hw hide-w" aria-label="Homework set Mon 19 Oct">
+        <div class="hw-head"><h4>Homework (Mon 19 Oct)</h4><button type="button" class="hw-toggle" aria-pressed="true">Show working</button></div>
+        <p class="hw-intro">Sheet algebra_identities_02 (16 problems). Problems 1–4 were also solved in class.</p>
+        <ol class="hw-list">
+        <li><div class="qa">
+          <div class="sub"><p class="q"><b>Problem 1.</b> Expand <span class="m">\left(p - \frac{1}{p}\right)^2</span></p>
+            <div class="w"><p>p² − 2 · p · <span class="fr"><span>1</span><span>p</span></span> + <span class="fr"><span>1</span><span>p²</span></span></p><p>= <span class="ans">p² − 2 + 1/p²</span></p><p class="why"><b>Why?</b> (a − b)² = a² − 2ab + b² with a = p and b = 1/p. The middle term is just 2, because p · (1/p) = 1.</p></div></div>
+        </div></li>
+        <li><div class="qa">
+          <div class="sub"><p class="q"><b>Problem 2.</b> Simplify <span class="m">\frac{a^2 - 6a + 9}{a^2 - 9}</span></p>
+            <div class="w"><p>= <span class="fr"><span>(a − 3)²</span><span>(a − 3)(a + 3)</span></span> = <span class="ans">(a − 3)/(a + 3)</span></p><p class="why"><b>Why?</b> The top is a perfect square (a − 3)², the bottom a difference of squares, so one (a − 3) cancels.</p></div></div>
+        </div></li>
+        <li><div class="qa">
+          <div class="sub"><p class="q"><b>Problem 3.</b> Expand <span class="m">\left(a^2b + \frac{1}{ab^2}\right)^2</span></p>
+            <div class="w"><p>a⁴b² + 2 · a²b · <span class="fr"><span>1</span><span>ab²</span></span> + <span class="fr"><span>1</span><span>a²b⁴</span></span></p><p>= <span class="ans">a⁴b² + 2a/b + 1/(a²b⁴)</span></p><p class="why"><b>Why?</b> (a + b)² = a² + 2ab + b² again. The middle term simplifies because a²b ÷ (ab²) = a/b.</p></div></div>
+        </div></li>
+        <li><div class="qa">
+          <div class="sub"><p class="q"><b>Problem 4.</b> If <span class="m">b + \frac{1}{b} = 6</span>, find <span class="m">b^2 + \frac{1}{b^2}</span>.</p>
+            <div class="w"><p>square both sides: b² + 2 + <span class="fr"><span>1</span><span>b²</span></span> = 36</p><p><span class="ans">b² + 1/b² = 34</span></p><p class="why"><b>Why?</b> Squaring b + 1/b gives b² + 1/b² plus the middle term 2 · b · (1/b) = 2. So subtract 2 from 36.</p></div></div>
+        </div></li>
+        <li><div class="qa">
+          <div class="sub"><p class="q"><b>Problem 5.</b> Factorise <span class="m">a^2 - \frac{b^2}{4}</span></p>
+            <div class="w"><p>a² − (<span class="fr"><span>b</span><span>2</span></span>)², difference of squares</p><p>= <span class="ans">(a + b/2)(a − b/2)</span></p><p class="why"><b>Why?</b> b²/4 = (b/2)², so it's a difference of squares a² − c² = (a + c)(a − c) with c = b/2.</p></div></div>
+        </div></li>
+        <li><div class="qa">
+          <div class="sub"><p class="q"><b>Problem 6.</b> Factorise fully <span class="m">10x + 2xy - 10y - 2y^2</span></p>
+            <div class="w"><p>2(5x + xy − 5y − y²) = 2[x(5 + y) − y(5 + y)]</p><p>= <span class="ans">2(5 + y)(x − y)</span></p><p class="why"><b>Why?</b> Take out 2, then group in pairs: the first pair has x, the second has −y, and both leave (5 + y).</p></div></div>
+        </div></li>
+        <li><div class="qa">
+          <div class="sub"><p class="q"><b>Problem 7.</b> Simplify <span class="m">\frac{x + 1}{5} \div \frac{x^2 - 2x - 3}{10}</span></p>
+            <div class="w"><p>= <span class="fr"><span>x + 1</span><span>5</span></span> · <span class="fr"><span>10</span><span>(x − 3)(x + 1)</span></span></p><p>= <span class="ans">2/(x − 3)</span></p><p class="why"><b>Why?</b> Dividing by a fraction = multiplying by its reciprocal. x² − 2x − 3 = (x − 3)(x + 1), so (x + 1) cancels and 10 ÷ 5 = 2.</p></div></div>
+        </div></li>
+        <li><div class="qa">
+          <div class="sub"><p class="q"><b>Problem 8.</b> Expand and simplify <span class="m">(x - 3)(x^2 + 5x - 1)</span></p>
+            <div class="w"><p>x³ + 5x² − x − 3x² − 15x + 3</p><p>= <span class="ans">x³ + 2x² − 16x + 3</span></p><p class="why"><b>Why?</b> Multiply every term in the first bracket by every term in the second, then collect like terms.</p></div></div>
+        </div></li>
+        <li><div class="qa">
+          <div class="sub"><p class="q"><b>Problem 9.</b> Simplify <span class="m">\frac{x^2 - 9}{2x^2 + 5x - 3}</span></p>
+            <div class="w"><p>= <span class="fr"><span>(x − 3)(x + 3)</span><span>(2x − 1)(x + 3)</span></span> = <span class="ans">(x − 3)/(2x − 1)</span></p><p class="why"><b>Why?</b> Factorise top and bottom. The common factor (x + 3) cancels.</p></div></div>
+        </div></li>
+        <li><div class="qa">
+          <div class="sub"><p class="q"><b>Problem 10.</b> Simplify <span class="m">\frac{a + b}{5a - 20ab^2} \div \frac{a^2 + 2ab + b^2}{3 - 6b}</span></p>
+            <div class="w"><p>= <span class="fr"><span>a + b</span><span>5a(1 − 2b)(1 + 2b)</span></span> · <span class="fr"><span>3(1 − 2b)</span><span>(a + b)²</span></span></p><p>= <span class="ans">3 / (5a(1 + 2b)(a + b))</span></p><p class="why"><b>Why?</b> Flip the second fraction and multiply. 1 − 4b² is a difference of squares and a² + 2ab + b² = (a + b)², so (1 − 2b) and one (a + b) cancel.</p></div></div>
+        </div></li>
+        <li><div class="qa">
+          <div class="sub"><p class="q"><b>Problem 11.</b> Write as a single fraction: <span class="m">\frac{3}{x^2 + 5x} - \frac{4}{x} + \frac{2}{x + 5}</span></p>
+            <div class="w"><p>common denominator x(x + 5)</p><p>= <span class="fr"><span>3 − 4(x + 5) + 2x</span><span>x(x + 5)</span></span> = <span class="ans">−(2x + 17) / (x(x + 5))</span></p><p class="why"><b>Why?</b> x² + 5x = x(x + 5), so that's the common denominator. Multiply each top by whatever its bottom is missing.</p></div></div>
+        </div></li>
+        <li><div class="qa">
+          <div class="sub"><p class="q"><b>Problem 12.</b> Factorise <span class="m">t^2 + 8t + 16</span></p>
+            <div class="w"><p>perfect square → <span class="ans">(t + 4)²</span></p><p class="why"><b>Why?</b> It matches a² + 2ab + b² with a = t and b = 4.</p></div></div>
+        </div></li>
+        <li><div class="qa">
+          <div class="sub"><p class="q"><b>Problem 13.</b> Factorise <span class="m">3x^2 - 11x + 6</span></p>
+            <div class="w"><p>a · c = 18 → −9 and −2</p><p>3x² − 9x − 2x + 6 = 3x(x − 3) − 2(x − 3) = <span class="ans">(x − 3)(3x − 2)</span></p><p class="why"><b>Why?</b> Split the middle: (−9) · (−2) = 18 = a · c and (−9) + (−2) = −11 = b.</p></div></div>
+        </div></li>
+        <li><div class="qa">
+          <div class="sub"><p class="q"><b>Problem 14.</b> One zero of <span class="m">x^2 + 3x + k</span> is <span class="m">x = 2</span>. Find <span class="m">k</span>.</p>
+            <div class="w"><p>substitute x = 2: 4 + 6 + k = 0</p><p><span class="ans">k = −10</span></p><p class="why"><b>Why?</b> A zero (root) is an x that makes the expression 0, so put x = 2 in and set it equal to 0.</p></div></div>
+        </div></li>
+        <li><div class="qa">
+          <div class="sub"><p class="q"><b>Problem 15.</b> Simplify <span class="m">\frac{x^2 - 10x + 25}{x - 5} + \frac{x^2 + 14x + 49}{x + 7}</span></p>
+            <div class="w"><p><span class="fr"><span>(x − 5)²</span><span>x − 5</span></span> + <span class="fr"><span>(x + 7)²</span><span>x + 7</span></span> = (x − 5) + (x + 7) = <span class="ans">2x + 2</span></p><p class="why"><b>Why?</b> Each top is the square of its own bottom, so each fraction simplifies to a single bracket.</p></div></div>
+        </div></li>
+        <li><div class="qa">
+          <div class="sub"><p class="q"><b>Problem 16.</b> Simplify <span class="m">(x + 4) \div \frac{x^2 + 8x + 16}{2}</span></p>
+            <div class="w"><p>(x + 4) · <span class="fr"><span>2</span><span>(x + 4)²</span></span> = <span class="ans">2/(x + 4)</span></p><p class="why"><b>Why?</b> Dividing by a fraction = multiplying by its reciprocal. x² + 8x + 16 = (x + 4)², so one (x + 4) cancels.</p></div></div>
+        </div></li>
+        </ol>
+      </section>
+    </div>
+  </article>
+
+  <!-- ALG 21 OCT -->
+  <article class="entry" id="alg-21-oct">
+    <div class="when"><time datetime="2026-10-21">Wed<span>21 Oct</span></time></div>
+    <div class="body">
+      <h3>Word problems · Systems of equations</h3>
+      <p class="lect">L7 Word problems · L8 Systems of equations</p>
+
+      <h4>Words to equations</h4>
+      <div class="box"><p>Name the unknowns, write one equation per fact, solve, then check the answer in the original words.</p></div>
+      <ul>
+        <li><b>Ex 4:</b> one number exceeds another by 17, sum 31: <span class="m">(x + 17) + x = 31 \Rightarrow x = 7</span>, numbers <span class="g"><b>24 and 7</b></span></li>
+        <li><b>Ex 6:</b> kitchen twice as long as wide, perimeter 84 ft: <span class="m">l = 2w,\ 2(2w + w) = 6w = 84</span> ⇒ <span class="g"><b>w = 14 ft, l = 28 ft</b></span></li>
+        <li><b>Ex 12:</b> box, length twice the width, height 8 in, volume 1600 in³: <span class="m">2w \cdot w \cdot 8 = 16w^2 = 1600</span> ⇒ <span class="g"><b>w = 10 in, l = 20 in</b></span></li>
+        <li><b>Ex 13:</b> the Aon Center's shadow is 142 ft; a 48-inch post casts a 6-inch shadow. Sun rays are parallel, so the triangles are similar:
+          <div class="m d">\frac{h}{142 \text{ ft}} = \frac{48 \text{ in}}{6 \text{ in}} = 8 \ \Rightarrow\ \textcolor{#15803d}{h = 8 \cdot 142 = 1136 \text{ ft}}</div></li>
+      </ul>
+
+      <h4>Systems of two equations</h4>
+      <p><b>Ex 2 a)</b> <span class="m">2x - y = 8, \quad -3x - 5y = 1</span>, three ways:</p>
+      <ol class="steps">
+        <li><b>Substitution:</b> <span class="m">y = 2x - 8</span>, so <span class="m">-3x - 5(2x - 8) = 1 \Rightarrow -13x + 40 = 1 \Rightarrow x = 3</span>, then <span class="m">y = 6 - 8 = -2</span>.</li>
+        <li><b>Elimination:</b> multiply the first by 5: <span class="m">10x - 5y = 40</span>. Subtract the second: <span class="m">13x = 39 \Rightarrow x = 3</span>, then <span class="m">y = -2</span>.</li>
+        <li><b>Graph:</b> each equation is a line. The answer is where they cross.</li>
+      </ol>
+      <figure class="sketch">
+        <svg width="230" height="280" viewBox="0 0 230 280" role="img" aria-label="Two lines crossing at the point 3, minus 2">
+          <line x1="20" y1="59" x2="200" y2="59" stroke="#64748b" stroke-width="1.2"/>
+          <line x1="52" y1="8" x2="52" y2="268" stroke="#64748b" stroke-width="1.2"/>
+          <text x="204" y="63" class="t-p">x</text><text x="56" y="14" class="t-p">y</text>
+          <line x1="118" y1="59" x2="118" y2="103" stroke="#15803d" stroke-dasharray="4 4"/>
+          <line x1="52" y1="103" x2="118" y2="103" stroke="#15803d" stroke-dasharray="4 4"/>
+          <text x="114" y="52" class="t-p">3</text><text x="30" y="107" class="t-p">−2</text>
+          <line x1="41" y1="257" x2="162" y2="15" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/>
+          <line x1="30" y1="50.2" x2="184" y2="142.6" stroke="#dc2626" stroke-width="2.2" stroke-linecap="round"/>
+          <circle cx="118" cy="103" r="4.5" fill="#15803d"/>
+          <text x="126" y="98" class="t-g" style="font-weight:700">(3, −2)</text>
+          <text x="118" y="210" class="t-b">2x − y = 8</text>
+          <text x="128" y="160" class="t-r">−3x − 5y = 1</text>
+        </svg>
+        <figcaption>The lines cross at (3, −2).</figcaption>
+      </figure>
+      <div class="m d">\textcolor{#15803d}{(x, y) = (3, -2)}</div>
+      <ul>
+        <li>Parallel lines (e.g. <span class="m">3x + 2y = 6,\ 6x + 4y = 16</span>) never cross, so there's <b>no solution</b>.</li>
+        <li>The same line twice (e.g. <span class="m">2x - 3y = -6,\ -4x + 6y = 12</span>) gives <b>infinitely many</b> solutions.</li>
+      </ul>
+
+      <h4>Absolute value by cases</h4>
+      <p><b>Ex 2 b)</b> <span class="m">x + |x - 5| = 7</span>. Split where the inside is 0, at <span class="m">x = 5</span>:</p>
+      <div class="m d">\begin{aligned}
+x \ge 5: &amp;\quad x + (x - 5) = 7 \Rightarrow 2x = 12 \Rightarrow \textcolor{#15803d}{x = 6} \ \checkmark \ (6 \ge 5) \\
+x \lt 5: &amp;\quad x - (x - 5) = 7 \Rightarrow 5 = 7 \ \ \textcolor{#dc2626}{\text{impossible ↯}}
+\end{aligned}</div>
+      <p>Check: <span class="m">6 + |6 - 5| = 7</span> ✓. On a graph, <span class="m">x + |x - 5|</span> is flat at 5 for <span class="m">x \lt 5</span>, then rises with slope 2 and meets <span class="m">y = 7</span> at <span class="m">x = 6</span>.</p>
+      <p class="oops">Keep only answers that fit their own case.</p>
+
+      <section class="hw hide-w" aria-label="Homework set Wed 21 Oct">
+        <div class="hw-head"><h4>Homework (Wed 21 Oct)</h4><button type="button" class="hw-toggle" aria-pressed="true">Show working</button></div>
+        <ol class="hw-list">
+        <li><div class="qa">
+          <div class="sub"><p class="q">One number is three more than twice another. Their sum is 36. Find the numbers. (Ex 5)</p>
+            <div class="w"><p>numbers x and 2x + 3: x + 2x + 3 = 36 ⇒ 3x = 33 ⇒ x = 11</p><p><span class="ans">11 and 25</span></p><p class="why"><b>Why?</b> "Three more than twice another" is 2x + 3, and "their sum" means add the two numbers.</p></div></div>
+        </div></li>
+        <li><div class="qa">
+          <div class="sub"><p class="q">A rectangular patio has a perimeter of 54 ft. The length is 3 ft more than the width. Find the dimensions. (Ex 8)</p>
+            <div class="w"><p>width w, length w + 3: 2(w + w + 3) = 54 ⇒ 4w + 6 = 54 ⇒ w = 12</p><p><span class="ans">12 ft by 15 ft</span></p><p class="why"><b>Why?</b> The perimeter of a rectangle is 2(length + width).</p></div></div>
+        </div></li>
+        <li><div class="qa">
+          <div class="sub"><p class="q">A store has $30,000 of inventory in 32-inch and 46-inch TVs. The profit is 22% on 32-inch and 40% on 46-inch TVs, and 35% on the whole stock. How much is invested in each? (Ex 14)</p>
+            <div class="w"><p>x = $ in 32-inch, y = $ in 46-inch</p><p>x + y = 30 000 &nbsp; and &nbsp; 0.22x + 0.40y = 0.35 · 30 000 = 10 500</p><p>y = 30 000 − x ⇒ 0.22x + 12 000 − 0.40x = 10 500 ⇒ 0.18x = 1500</p><p><span class="ans">x ≈ $8,333.33, y ≈ $21,666.67</span></p><p class="why"><b>Why?</b> Two unknowns need two equations: one for the total money, one for the total profit (35% of the whole stock).</p></div></div>
+        </div></li>
+        <li><div class="qa">
+          <p class="q">Solve the system. (Ex 2)</p>
+          <div class="sub"><p class="q"><b>b)</b> <span class="m">x + 4y = 10,\quad 3x - 2y = -12</span></p>
+            <div class="w"><p>x = 10 − 4y ⇒ 3(10 − 4y) − 2y = −12 ⇒ 30 − 14y = −12 ⇒ y = 3</p><p>x = 10 − 12 = −2 → <span class="ans">(−2, 3)</span></p><p class="why"><b>Why?</b> Substitution: get x alone from the easier equation and put it into the other, so only y is left.</p></div></div>
+          <div class="sub"><p class="q"><b>c)</b> <span class="m">-x - 5y = 29,\quad 7x + 3y = -43</span></p>
+            <div class="w"><p>x = −29 − 5y ⇒ 7(−29 − 5y) + 3y = −43 ⇒ −203 − 32y = −43 ⇒ y = −5</p><p>x = −29 + 25 = −4 → <span class="ans">(−4, −5)</span></p><p class="why"><b>Why?</b> Same method. x has the coefficient −1, so it's the easiest letter to get alone.</p></div></div>
+          <div class="sub"><p class="q"><b>d)</b> <span class="m">2x + 15y = 9,\quad x - 18y = -21</span></p>
+            <div class="w"><p>x = 18y − 21 ⇒ 2(18y − 21) + 15y = 9 ⇒ 51y = 51 ⇒ y = 1</p><p>x = 18 − 21 = −3 → <span class="ans">(−3, 1)</span></p><p class="why"><b>Why?</b> x has the coefficient 1 in the second equation, so get it alone there.</p></div></div>
+        </div></li>
+        <li><div class="qa">
+          <p class="q">Solve. (Ex 2, absolute value)</p>
+          <div class="sub"><p class="q"><b>e)</b> <span class="m">|x + 1| + |x - 3| = 8</span></p>
+            <div class="w"><p>split at x = −1 and x = 3</p><p>x ≥ 3: (x + 1) + (x − 3) = 8 ⇒ 2x − 2 = 8 ⇒ x = 5 ✓</p><p>−1 ≤ x &lt; 3: (x + 1) − (x − 3) = 8 ⇒ 4 = 8 <span class="no">impossible</span></p><p>x &lt; −1: −(x + 1) − (x − 3) = 8 ⇒ −2x + 2 = 8 ⇒ x = −3 ✓</p><p><span class="ans">x = −3 or x = 5</span></p><p class="why"><b>Why?</b> Each bar changes sign where its inside is 0 (x = −1 and x = 3). That splits the number line into 3 parts, and in each part the bars can be removed. Keep only answers that land in their own part.</p></div></div>
+          <div class="sub"><p class="q"><b>g)</b> <span class="m">|3x - 4| = -x + 4</span></p>
+            <div class="w"><p>the right side can't be negative, so x ≤ 4</p><p>3x − 4 = −x + 4 ⇒ x = 2 &nbsp;&nbsp; or &nbsp;&nbsp; 3x − 4 = x − 4 ⇒ x = 0</p><p><span class="ans">x = 0 or x = 2</span></p><p class="why"><b>Why?</b> An absolute value is never negative, so −x + 4 must be ≥ 0. Then the inside equals +(−x + 4) or −(−x + 4).</p></div></div>
+          <div class="sub"><p class="q"><b>h)</b> <span class="m">x \cdot |x| = -9</span></p>
+            <div class="w"><p>x ≥ 0: x² = −9 <span class="no">impossible</span></p><p>x &lt; 0: −x² = −9 ⇒ x² = 9 ⇒ x = −3 (−3 fits, +3 doesn't)</p><p><span class="ans">x = −3</span></p><p class="why"><b>Why?</b> For x ≥ 0, x · |x| = x², which can't be negative. For x &lt; 0, |x| = −x, so x · |x| = −x².</p></div></div>
+        </div></li>
+        </ol>
+      </section>
+    </div>
+  </article>
+
+  <!-- ALG 26 OCT -->
+  <article class="entry" id="alg-26-oct">
+    <div class="when"><time datetime="2026-10-26">Mon<span>26 Oct</span></time></div>
+    <div class="body">
+      <h3>Absolute value functions · Rational equations</h3>
+      <p class="lect">L9 Functions involving absolute values · L10 Equations involving rational fractions</p>
+
+      <h4>The two puzzles (handout from 21 Oct)</h4>
+      <p><b>12 circles:</b> <span class="m">1 + 2 + \dots + 12 = 78</span> and outer = 2 × inner, so <span class="g"><b>inner 26, outer 52</b></span>. Teacher's inner circles: 1 + 2 + 11 + 12 = 26.</p>
+      <p><b>10 squares</b> (neighbours' squares add up to the opposites' squares): <span class="m">A^2 + B^2 = F^2 + G^2</span> becomes <span class="m">A^2 - F^2 = G^2 - B^2</span>, and going round the ring every difference is <span class="m">16^2 - 8^2 = 192</span>. Use the difference of squares:</p>
+      <div class="m d">(C + H)(C - H) = 192 \qquad \text{both factors even}</div>
+      <div class="m d">\begin{aligned}
+C + H = 96,\ C - H = 2 &amp;\Rightarrow \textcolor{#15803d}{C = 49,\ H = 47} \\
+I + D = 48,\ I - D = 4 &amp;\Rightarrow \textcolor{#15803d}{I = 26,\ D = 22} \\
+E + K = 32,\ E - K = 6 &amp;\Rightarrow \textcolor{#15803d}{E = 19,\ K = 13}
+\end{aligned}</div>
+      <p>Final grid: A 16, B 2, C 49, D 22, E 19, F 8, G 14, H 47, I 26, K 13.</p>
+
+      <h4>Absolute value equation: x² = |x|</h4>
+      <div class="m d">\begin{aligned}
+x \ge 0: &amp;\quad x^2 = x \Rightarrow x(x - 1) = 0 \Rightarrow x = 0 \ \text{or}\ 1 \\
+x \lt 0: &amp;\quad x^2 = -x \Rightarrow x(x + 1) = 0 \Rightarrow x = -1 \ \ (0 \text{ doesn't fit } x \lt 0)
+\end{aligned}</div>
+      <div class="m d">\textcolor{#15803d}{x = -1,\ 0,\ 1}</div>
+
+      <h4>Vertex form</h4>
+      <div class="box"><div class="m d">f(x) = a\,|x - h| + k \qquad \text{vertex } (h, k)</div>
+        <p><span class="m">a \gt 0</span>: opens up, minimum <span class="m">k</span>. &nbsp; <span class="m">a \lt 0</span>: opens down, maximum <span class="m">k</span>. &nbsp; <span class="m">|a|</span> = how steep.</p></div>
+      <p><b>Ex 3:</b> build up <span class="m">2|x - 4| - 3</span> step by step:</p>
+      <div class="m d">|x| \ \xrightarrow{\text{right } 4}\ |x - 4| \ \xrightarrow{\text{steeper}}\ 2|x - 4| \ \xrightarrow{\text{down } 3}\ 2|x - 4| - 3</div>
+      <p>Vertex <span class="g"><span class="m">(4, -3)</span></span>, &nbsp; D = ℝ = ]−∞, +∞[, &nbsp; R = <span class="g">[−3, +∞[</span></p>
+      <p><b>Ex 4:</b> <span class="m">-3|x + 2| + 8</span> opens down, vertex <span class="m">(-2, 8)</span>, R = <span class="g">]−∞, 8]</span></p>
+
+      <h4>Domain and range</h4>
+      <div class="m d">[a, b] = \{\, x \in \mathbb{R} \mid a \le x \le b \,\}</div>
+      <p><b>Ex 5:</b> <span class="m">f(x) = 2|x - 1| - 3</span> with <span class="m">D_f = [-4, 4]</span>. Check both ends and the vertex:</p>
+      <div class="m d">f(-4) = 7 \qquad f(4) = 3 \qquad f(1) = -3 \ \ (\text{vertex}) \qquad \Rightarrow \qquad \textcolor{#15803d}{R_f = [-3, 7]}</div>
+      <figure class="sketch">
+        <svg width="240" height="250" viewBox="0 0 240 250" role="img" aria-label="Graph of 2 times absolute value of x minus 1, minus 3, on minus 4 to 4, range minus 3 to 7">
+          <line x1="14" y1="159" x2="206" y2="159" stroke="#64748b" stroke-width="1.2"/>
+          <line x1="110" y1="8" x2="110" y2="240" stroke="#64748b" stroke-width="1.2"/>
+          <text x="208" y="163" class="t-p">x</text><text x="114" y="14" class="t-p">y</text>
+          <polyline points="38,33 128,213 182,105" fill="none" stroke="#1d4ed8" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+          <circle cx="38" cy="33" r="4" fill="#1d4ed8"/><circle cx="182" cy="105" r="4" fill="#1d4ed8"/><circle cx="128" cy="213" r="4" fill="#1d4ed8"/>
+          <text x="44" y="28">(−4, 7)</text>
+          <text x="136" y="226">(1, −3)</text>
+          <text x="160" y="96">(4, 3)</text>
+          <line x1="224" y1="33" x2="224" y2="213" stroke="#15803d" stroke-width="3" stroke-linecap="round"/>
+          <line x1="38" y1="33" x2="220" y2="33" stroke="#15803d" stroke-dasharray="3 5" stroke-width="1"/>
+          <line x1="128" y1="213" x2="220" y2="213" stroke="#15803d" stroke-dasharray="3 5" stroke-width="1"/>
+          <text x="212" y="248" class="t-g" style="font-weight:700">R = [−3, 7]</text>
+        </svg>
+        <figcaption>The range runs from the vertex (−3) up to the higher end (7).</figcaption>
+      </figure>
+      <p><b>Slope</b> (gradient) = <span class="m">\dfrac{\text{rise}}{\text{run}} = \dfrac{\Delta y}{\Delta x} = \dfrac{y_2 - y_1}{x_2 - x_1}</span></p>
+      <p><b>Ex 6:</b> <span class="m">f(x) = |x - 3| + 2</span>, find <span class="m">f(f(2))</span>. Work from the inside out: <span class="m">f(2) = 3</span>, then <span class="m">f(3) = </span><span class="g"><b>2</b></span>.</p>
+
+      <h4>Equations with rational fractions</h4>
+      <div class="box"><p>Write the <b>Cond.</b> first: every denominator ≠ 0. An answer that breaks it is rejected.</p></div>
+      <p><b>Ex 1 a)</b> <span class="m">\frac{1}{x - 2} + 3 = \frac{3 - x}{x - 2}</span>, &nbsp; Cond.: <span class="m">x \neq 2</span></p>
+      <div class="m d">1 + 3(x - 2) = 3 - x \Rightarrow 4x = 8 \Rightarrow \textcolor{#dc2626}{x = 2 \ \text{rejected}} \ \Rightarrow\ \text{NO SOLUTION}</div>
+      <p><b>Ex 1 h)</b> <span class="m">\frac{x^2 - 8x + 16}{x - 4} = 4 - x</span>, &nbsp; Cond.: <span class="m">x \neq 4</span></p>
+      <div class="m d">\frac{(x - 4)^2}{x - 4} = x - 4 = 4 - x \Rightarrow \textcolor{#dc2626}{x = 4 \ \text{rejected}} \ \Rightarrow\ \text{NO SOLUTION}</div>
+      <p><b>Ex 3 a)</b> <span class="m">\frac{2x}{x + 3} + \frac{5}{x} - 4 = \frac{18}{x^2 + 3x}</span>, &nbsp; Cond.: <span class="m">x \neq 0,\ x \neq -3</span>. Multiply by <span class="m">x(x + 3)</span>:</p>
+      <div class="m d">2x^2 + 5(x + 3) - 4x(x + 3) = 18 \Rightarrow 2x^2 + 7x + 3 = 0 \Rightarrow x = \frac{-7 \pm 5}{4}</div>
+      <div class="m d">\textcolor{#15803d}{x = -\tfrac12} \qquad \textcolor{#dc2626}{x = -3 \ \text{rejected}}</div>
+
+      <section class="hw hide-w" aria-label="Homework set Mon 26 Oct">
+        <div class="hw-head"><h4>Homework (Mon 26 Oct)</h4><button type="button" class="hw-toggle" aria-pressed="true">Show working</button></div>
+        <ol class="hw-list">
+        <li><div class="qa">
+          <p class="q">Solve. (Ex 5)</p>
+          <div class="sub"><p class="q"><b>c)</b> <span class="m">2x^2 = |x - 1|</span></p>
+            <div class="w"><p>x ≥ 1: 2x² = x − 1 ⇒ 2x² − x + 1 = 0, Δ = 1 − 8 &lt; 0 <span class="no">no roots</span></p><p>x &lt; 1: 2x² = 1 − x ⇒ 2x² + x − 1 = 0 ⇒ (2x − 1)(x + 1) = 0 ⇒ x = ½ or −1 ✓</p><p><span class="ans">x = −1 or x = ½</span></p><p class="why"><b>Why?</b> The bar changes at x = 1, so split into x ≥ 1 and x &lt; 1. A quadratic with Δ &lt; 0 has no real roots.</p></div></div>
+          <div class="sub"><p class="q"><b>d)</b> <span class="m">2x^2 - 5x - 3|x - 2| = 0</span></p>
+            <div class="w"><p>x ≥ 2: 2x² − 8x + 6 = 0 ⇒ x² − 4x + 3 = 0 ⇒ x = 3 ✓ (x = 1 <span class="no">doesn't fit</span>)</p><p>x &lt; 2: 2x² − 2x − 6 = 0 ⇒ x² − x − 3 = 0 ⇒ x = <span class="fr"><span>1 ± √13</span><span>2</span></span> → only <span class="fr"><span>1 − √13</span><span>2</span></span> ≈ −1.3 fits</p><p><span class="ans">x = 3 or x = (1 − √13)/2</span></p><p class="why"><b>Why?</b> Same split, at x = 2. Each case gives a quadratic. Keep only the roots that belong to their own case.</p></div></div>
+        </div></li>
+        <li><div class="qa">
+          <div class="sub"><p class="q">Find the vertex of <span class="m">x \mapsto 6 - 2|x + 1|</span>. (Ex 4)</p>
+            <div class="w"><p>= −2|x − (−1)| + 6, so h = −1, k = 6, a = −2 (opens down)</p><p><span class="ans">vertex (−1, 6)</span></p><p class="why"><b>Why?</b> Write it in vertex form a|x − h| + k. |x + 1| = |x − (−1)|, so h = −1 and k = 6. a = −2 is negative, so it opens down.</p></div></div>
+        </div></li>
+        <li><div class="qa">
+          <div class="sub"><p class="q">Give the domain and range of <span class="m">x \mapsto |2x - 1| - 3</span>. (Ex 6)</p>
+            <div class="w"><p>inside is 0 at x = ½, so the vertex is (½, −3), opens up</p><p><span class="ans">D = ℝ, R = [−3, +∞[</span></p><p class="why"><b>Why?</b> The vertex is where the inside, 2x − 1, is 0. The smallest |…| can be is 0, so the smallest value is −3.</p></div></div>
+        </div></li>
+        <li><div class="qa">
+          <p class="q">Solve. (Ex 1)</p>
+          <div class="sub"><p class="q"><b>b)</b> <span class="m">\frac{1}{x - 5} + 6 = \frac{6 - x}{x - 5}</span></p>
+            <div class="w"><p>Cond.: x ≠ 5</p><p>× (x − 5): 1 + 6(x − 5) = 6 − x ⇒ 7x = 35 ⇒ x = 5 <span class="no">rejected</span></p><p><span class="ans">NO SOLUTION</span></p><p class="why"><b>Why?</b> Multiplying by (x − 5) removes the fractions, but x = 5 makes the original bottoms 0, so it's not allowed.</p></div></div>
+          <div class="sub"><p class="q"><b>d)</b> <span class="m">\frac{2x + 1}{x + 2} + 3 = \frac{x + 11}{x + 2}</span></p>
+            <div class="w"><p>Cond.: x ≠ −2</p><p>× (x + 2): 2x + 1 + 3(x + 2) = x + 11 ⇒ 5x + 7 = x + 11 ⇒ x = 1 ✓</p><p><span class="ans">x = 1</span></p><p class="why"><b>Why?</b> Same method. x = 1 doesn't break the Cond., so it stays.</p></div></div>
+        </div></li>
+        <li><div class="qa">
+          <div class="sub"><p class="q">Solve <span class="m">\frac{5x}{x - 2} + \frac{3}{x} + 2 = \frac{-6}{x^2 - 2x}</span>. (Ex 3 b)</p>
+            <div class="w"><p>Cond.: x ≠ 0, x ≠ 2</p><p>× x(x − 2): 5x² + 3(x − 2) + 2x(x − 2) = −6</p><p>7x² − x − 6 = −6 ⇒ 7x² − x = 0 ⇒ x(7x − 1) = 0 ⇒ x = 0 <span class="no">rejected</span> or x = <span class="fr"><span>1</span><span>7</span></span></p><p><span class="ans">x = 1/7</span></p><p class="why"><b>Why?</b> x² − 2x = x(x − 2), so that's the common denominator. x = 0 breaks the Cond., so it's rejected.</p></div></div>
+        </div></li>
+        <li><div class="qa">
+          <div class="sub"><p class="q">A dog runs 100 m at 5 m/s, then 120 m at 8 m/s. What is the total time? (Ex 18)</p>
+            <div class="w"><p>t = <span class="fr"><span>s</span><span>v</span></span>: &nbsp; <span class="fr"><span>100</span><span>5</span></span> = 20 s, &nbsp; <span class="fr"><span>120</span><span>8</span></span> = 15 s</p><p><span class="ans">35 s</span></p><p class="why"><b>Why?</b> time = distance ÷ speed, worked out for each part on its own, then added.</p></div></div>
+        </div></li>
+        <li><div class="qa">
+          <div class="sub"><p class="q">350 students, girls : boys = 4 : 3. How many of each? (Ex 33)</p>
+            <div class="w"><p>4 + 3 = 7 parts, 350 ÷ 7 = 50 per part</p><p><span class="ans">200 girls, 150 boys</span></p><p class="why"><b>Why?</b> A ratio 4 : 3 splits the total into 4 + 3 = 7 equal parts.</p></div></div>
+        </div></li>
+        </ol>
+      </section>
+    </div>
+  </article>
+</section>
+
+<!-- ===================================================== DISCRETE ===================================================== -->
+<section class="subject" id="sec-discrete" role="tabpanel" aria-labelledby="tab-discrete" hidden>
+  <div class="subject-head">
+    <h2>Discrete Mathematics</h2>
+    <p>Dr Zsombor Szilágyi · Tue 10:15 and Fri 08:30</p>
+    <p class="sheet-link"><a href="https://claude.ai/artifact/Fxmqn5NFsaiAkxvLQeMYMt" target="_blank" rel="noopener">Open the cheat sheet →</a></p>
+    <p class="plan">Semester plan: Sets → Numbers (divisibility, primes, HCF/LCM, bases) → Counting → Probability. We're on Sets.</p>
+    <div class="chips">
+      <button data-go="dis-13-oct">Tue 13 Oct · Sets, number sets</button>
+      <button data-go="dis-20-oct">Tue 20 Oct · Sets plus sheet</button>
+    </div>
+  </div>
+
+  <!-- DIS 13 OCT -->
+  <article class="entry" id="dis-13-oct">
+    <div class="when"><time datetime="2026-10-13">Tue<span>13 Oct</span></time></div>
+    <div class="body">
+      <h3>Sets and number sets</h3>
+      <p class="lect">Board photos · sheet 1_Sets</p>
+
+      <h4>What a set is</h4>
+      <p>A collection of elements: <span class="m">A = \{a,\ 2,\ -3,\ x,\ \text{cat}\}</span>. &nbsp; <span class="m">2 \in A</span> means 2 is in A, &nbsp; <span class="m">1 \notin A</span> means 1 is not in A.</p>
+      <p>It needs a clear yes/no rule: {tall people} <span class="r">✗</span> but {people taller than 1.85 m} <span class="g">✓</span>; {fast cars} <span class="r">✗</span> but {cars that reach 200 km/h} <span class="g">✓</span>.</p>
+      <p class="oops">Order and repeats don't matter: <span class="m">\{2, 5, 3\} = \{5, 2, 3\} = \{2, 5, 3, 5\}</span></p>
+
+      <h4>Subsets</h4>
+      <div class="box"><p><span class="m">B \subseteq A</span>: every element of B is in A &nbsp; (<span class="m">x \in B \Rightarrow x \in A</span>)</p></div>
+      <p><span class="m">A = \{2, 5, 3\},\ B = \{2, 3\},\ C = \{2, 1\}</span>: &nbsp; <span class="m">B \subseteq A</span>, but <span class="m">C \not\subseteq A</span> because <span class="m">1 \notin A</span>.</p>
+
+      <h4>Number sets</h4>
+      <div class="box"><div class="m d">\mathbb{N} = \{0, 1, 2, 3, \dots\} \subset \mathbb{Z} \subset \mathbb{Q} \subset \mathbb{R}</div><p>He counts 0 as a natural number. &nbsp; Irrationals: <span class="m">\mathbb{Q}^*</span> (√2, π, e)</p></div>
+      <figure class="sketch">
+        <svg width="340" height="200" viewBox="0 0 340 200" role="img" aria-label="Nested number sets: N inside Z inside Q inside R, irrationals outside Q">
+          <rect x="4" y="4" width="332" height="192" rx="18" fill="none" stroke="#1e293b" stroke-width="2"/>
+          <ellipse cx="135" cy="100" rx="125" ry="85" fill="none" stroke="#1d4ed8" stroke-width="2"/>
+          <ellipse cx="110" cy="106" rx="85" ry="58" fill="none" stroke="#1e293b" stroke-width="1.6"/>
+          <ellipse cx="90" cy="112" rx="48" ry="32" fill="#fde68a" fill-opacity=".55" stroke="#1e293b" stroke-width="1.6"/>
+          <text x="84" y="106" style="font-weight:700;font-size:15px">ℕ</text>
+          <text x="66" y="127">0, 1, 2</text>
+          <text x="104" y="66" style="font-weight:700;font-size:15px">ℤ</text>
+          <text x="150" y="112">−1, −2</text>
+          <text x="128" y="34" class="t-b" style="font-weight:700;font-size:15px">ℚ</text>
+          <text x="207" y="96" class="t-b">⅔</text>
+          <text x="203" y="118" class="t-b">1.5</text>
+          <text x="306" y="30" style="font-weight:700;font-size:15px">ℝ</text>
+          <text x="276" y="88" class="t-r" style="font-weight:700">ℚ*</text>
+          <text x="270" y="110" class="t-r">√2  π  e</text>
+        </svg>
+        <figcaption>Each set sits inside the next. The irrationals ℚ* are the part of ℝ outside ℚ.</figcaption>
+      </figure>
+      <p>Why we need each one:</p>
+      <div class="m d">\begin{aligned}
+x + 2 = 5 &amp;\Rightarrow x = 3 \in \mathbb{N} &amp; x + 5 = 2 &amp;\Rightarrow x = -3 \ \text{needs } \mathbb{Z} \\
+2x = 6 &amp;\Rightarrow x = 3 &amp; 2x = 5 &amp;\Rightarrow x = \tfrac52 \ \text{needs } \mathbb{Q} \\
+x^2 = 9 &amp;\Rightarrow x = \pm 3 &amp; x^2 = 2 &amp;\Rightarrow x = \pm\sqrt2 \ \text{needs } \mathbb{R}
+\end{aligned}</div>
+      <p><span class="m">x^2 = -9</span> has no real solution (that needs complex numbers ℂ, not in this course).</p>
+
+      <h4>Decimals</h4>
+      <ul>
+        <li><span class="m">\mathbb{Q}</span>: the decimal ends (1.5 = 3/2, 1.53 = 153/100) or repeats (<span class="m">1.\overline{5} = 1.555\ldots</span>)</li>
+        <li><span class="m">\mathbb{Q}^*</span>: never ends, never repeats (1.505005000500005…)</li>
+      </ul>
+      <div class="box"><p>Repeating decimal → fraction: multiply by <span class="m">10^n</span> (n = length of the repeating block), then subtract.</p></div>
+      <div class="m d">\begin{aligned}
+x = 1.\overline{5}: &amp;\quad 10x = 15.\overline{5} \Rightarrow 9x = 14 \Rightarrow \textcolor{#15803d}{x = \tfrac{14}{9}} \\
+x = 1.\overline{25}: &amp;\quad 100x = 125.\overline{25} \Rightarrow 99x = 124 \Rightarrow \textcolor{#15803d}{x = \tfrac{124}{99}}
+\end{aligned}</div>
+
+      <h4>Smallest set each number is in (2A Q3)</h4>
+      <p><span class="m">8 \in \mathbb{N}</span>, &nbsp; <span class="m">-8 \in \mathbb{Z}</span>, &nbsp; <span class="m">2\tfrac13 \in \mathbb{Q}</span>, &nbsp; <span class="m">-3\tfrac14 \in \mathbb{Q}</span>, &nbsp; <span class="m">\sqrt3 \in \mathbb{Q}^*</span>, &nbsp; <span class="m">\frac{\sqrt{400}}{20} = 1 \in \mathbb{N}</span>, &nbsp; <span class="m">9.176 \in \mathbb{Q}</span>, &nbsp; <span class="m">\pi - \pi = 0 \in \mathbb{N}</span>. &nbsp; <span class="m">\sqrt{-3}</span> is in none of them (it's complex).</p>
+
+      <h4>Number of elements (2A Q4)</h4>
+      <div class="box"><p><span class="m">|A| = n(A)</span> = the number of elements in A</p></div>
+      <ul>
+        <li>factors of 6 = {1, 2, 3, 6}: <span class="m">|A| = 4</span>, finite</li>
+        <li>multiples of 6 = {6, 12, 18, …}: infinite</li>
+        <li>factors of 17 = {1, 17}: 2 &nbsp; · &nbsp; primes &lt; 20 = {2, 3, 5, 7, 11, 13, 17, 19}: 8</li>
+      </ul>
+
+      <h4>Counterexamples (2A Q8)</h4>
+      <p class="oops">Two irrationals can give a rational: <span class="m">\sqrt2 + (-\sqrt2) = 0</span> and <span class="m">\sqrt3 \cdot \sqrt3 = 3</span>.</p>
+
+      <h4>Set-builder notation</h4>
+      <p><span class="m">\{\, x \mid \text{condition} \,\}</span> reads "the set of all x such that…".</p>
+      <div class="m d">\{\, x \mid 2 \lt x \lt 5,\ x \in \mathbb{Z} \,\} = \textcolor{#15803d}{\{3, 4\}}</div>
+      <p class="oops">The board showed {2, 3, 4}, but 2 is not greater than 2.</p>
+
+      <h4>Intervals</h4>
+      <p>If no number set is given, assume ℝ: <span class="m">\{x \mid x \gt 4\} = \{x \mid x \gt 4,\ x \in \mathbb{R}\}</span>.</p>
+      <div class="m d">\{\, t \mid 2 \lt t \lt 7 \,\} = (2, 7) = \,]2, 7[ \ \ \text{open (ends excluded)} \qquad [2, 7] \ \ \text{closed (ends included)}</div>
+      <p>On a number line: open circle = end excluded, filled circle = end included.</p>
+    </div>
+  </article>
+
+  <!-- DIS 20 OCT -->
+  <article class="entry" id="dis-20-oct">
+    <div class="when"><time datetime="2026-10-20">Tue<span>20 Oct</span></time></div>
+    <div class="body">
+      <h3>The "Sets plus" sheet, worked in class</h3>
+      <p class="lect">Board photos · sheet 1_Sets_plus (H = homework problems)</p>
+
+      <h4>Problem 3: list the elements</h4>
+      <div class="m d">\begin{aligned}
+\text{primes} \lt 15 &amp;= \{2, 3, 5, 7, 11, 13\} \\
+\text{last digit of } 2^n &amp;= \{1, 2, 4, 6, 8\} \\
+x^3 - 9x = 0 \Rightarrow x(x + 3)(x - 3) = 0 &amp;\Rightarrow \{-3, 0, 3\} \\
+\text{even primes} &amp;= \{2\} \\
+\text{naturals ending in 4 and divisible by 5} &amp;= \emptyset \\
+\{\, 2k \mid 1 \lt k \le 5 \,\} &amp;= \{4, 6, 8, 10\} \\
+\{\, x \mid x + 5 = 3,\ x \in \mathbb{N} \,\} &amp;= \emptyset
+\end{aligned}</div>
+
+      <h4>Problem 4: regions in the xy-plane</h4>
+      <div class="box"><p>"AND" = <span class="m">\cap</span> (overlap) &nbsp; · &nbsp; "OR" = <span class="m">\cup</span> (both together). &nbsp; <span class="m">x^2 + y^2 = r^2</span> is a circle of radius r (Pythagoras).</p></div>
+      <div class="m d">\begin{aligned}
+&amp;A: -1 \le x \le 2,\ 1 \le y \le 3 &amp;&amp;\text{rectangle } 3 \times 2, &amp;&amp;\text{area } \textcolor{#15803d}{6} \\
+&amp;B: x^2 + y^2 \le 4,\ x \ge 0,\ y \le 0 &amp;&amp;\text{quarter disc, } r = 2, &amp;&amp;\text{area } \textcolor{#15803d}{\pi} \\
+&amp;C: 4 \le x^2 + y^2 \le 9,\ x \ge 0,\ y \le 0 &amp;&amp;\text{quarter ring}, &amp;&amp;\text{area } \tfrac{9\pi - 4\pi}{4} = \textcolor{#15803d}{\tfrac{5\pi}{4}} \\
+&amp;D: y \le x,\ y \ge 0,\ 0 \le x \le 5 &amp;&amp;\text{triangle}, &amp;&amp;\text{area } \tfrac12 \cdot 5 \cdot 5 = \textcolor{#15803d}{12.5}
+\end{aligned}</div>
+
+      <h4>H1: does the answer stay in the set?</h4>
+      <div class="tbl"><table>
+        <tr><th></th><th>ℤ⁺</th><th>ℤ⁻</th><th>ℚ⁺</th><th>ℚ⁻</th><th>primes</th></tr>
+        <tr><th>a + b</th><td class="g">✓</td><td class="g">✓</td><td class="g">✓</td><td class="g">✓</td><td class="r">✗</td></tr>
+        <tr><th>a · b</th><td class="g">✓</td><td class="r">✗</td><td class="g">✓</td><td class="r">✗</td><td class="r">✗</td></tr>
+        <tr><th>a − b</th><td class="r">✗</td><td class="r">✗</td><td class="r">✗</td><td class="r">✗</td><td class="r">✗</td></tr>
+        <tr><th>a ÷ b</th><td class="r">✗</td><td class="r">✗</td><td class="g">✓</td><td class="r">✗</td><td class="r">✗</td></tr>
+      </table></div>
+      <p>One counterexample is enough for ✗: <span class="m">(-2)(-3) = 6 \notin \mathbb{Z}^-</span>, &nbsp; <span class="m">3 + 5 = 8</span> is not prime.</p>
+
+      <h4>Exact trig values (from the board)</h4>
+      <p>45° comes from a unit square with diagonal √2. 30° and 60° come from an equilateral triangle of side 2 cut in half (height √3).</p>
+      <div class="tbl"><table>
+        <tr><th></th><th>30°</th><th>45°</th><th>60°</th></tr>
+        <tr><th>sin</th><td><span class="m">\tfrac12</span></td><td><span class="m">\tfrac{1}{\sqrt2}</span></td><td><span class="m">\tfrac{\sqrt3}{2}</span></td></tr>
+        <tr><th>cos</th><td><span class="m">\tfrac{\sqrt3}{2}</span></td><td><span class="m">\tfrac{1}{\sqrt2}</span></td><td><span class="m">\tfrac12</span></td></tr>
+        <tr><th>tan (tg)</th><td><span class="m">\tfrac{1}{\sqrt3}</span></td><td><span class="m">1</span></td><td><span class="m">\sqrt3</span></td></tr>
+      </table></div>
+
+      <h4>Problem 7: count the elements</h4>
+      <div class="m d">|\{\}| = 0 \qquad \textcolor{#dc2626}{|\{\{\}\}| = 1} \qquad |\{1, 2, \{3, 4\}\}| = 3 \qquad |\{\{\}, 5, \{1, 2, 3, 4, 5\}\}| = 3 \qquad |\{\{1, 2, 3\}\}| = 1</div>
+      <p class="oops">A set inside a set counts as <b>one</b> element. <span class="m">\{\{\}\}</span> is not empty: it holds the empty set.</p>
+
+      <h4>Problem 8: all subsets of {a, b, c}</h4>
+      <div class="m d">\emptyset \quad | \quad \{a\},\ \{b\},\ \{c\} \quad | \quad \{a, b\},\ \{b, c\},\ \{a, c\} \quad | \quad \{a, b, c\} \qquad \Rightarrow \qquad \textcolor{#15803d}{8 = 2^3}</div>
+      <div class="box"><p>A set with n elements has <span class="m">2^n</span> subsets (the empty set and the set itself both count).</p></div>
+      <p><span class="m">\{2, 7, 0, -3, \pi\}</span> has <span class="m">2^5 = </span><span class="g"><b>32</b></span> subsets.</p>
+    </div>
+  </article>
+</section>
+
+<!-- ===================================================== PHYSICS ===================================================== -->
+<section class="subject" id="sec-physics" role="tabpanel" aria-labelledby="tab-physics" hidden>
+  <div class="subject-head">
+    <h2>College Physics 1</h2>
+    <p>Dr Zsombor Szilágyi · Tue 08:30</p>
+    <p class="sheet-link"><a href="https://claude.ai/artifact/U3Ca1qMDzvMMBxzm6Fem6E" target="_blank" rel="noopener">Open the cheat sheet →</a></p>
+    <p class="plan">Semester plan: SI units → 1D motion → 2D motion → forces, energy, momentum → mixed problems. We're on uniform motion.</p>
+    <div class="chips">
+      <button data-go="phy-13-oct">Tue 13 Oct · SI units</button>
+      <button data-go="phy-20-oct">Tue 20 Oct · Uniform motion</button>
+    </div>
+  </div>
+
+  <!-- PHY 13 OCT -->
+  <article class="entry" id="phy-13-oct">
+    <div class="when"><time datetime="2026-10-13">Tue<span>13 Oct</span></time></div>
+    <div class="body">
+      <h3>SI units</h3>
+      <p class="lect">Board photos · sheet 1_Units</p>
+
+      <h4>Base quantities</h4>
+      <div class="tbl"><table>
+        <tr><th class="l">Quantity</th><th>Symbol</th><th>Unit</th></tr>
+        <tr><td class="l">length, distance</td><td>s, d, l, h</td><td class="b"><b>metre (m)</b></td></tr>
+        <tr><td class="l">time</td><td>t</td><td class="b"><b>second (s)</b></td></tr>
+        <tr><td class="l">mass</td><td>m</td><td class="b"><b>kilogram (kg)</b></td></tr>
+        <tr><td class="l" colspan="3" style="color:var(--pencil)">Physics 2: temperature (K), current (A), amount of substance (mol), luminous intensity (cd)</td></tr>
+      </table></div>
+
+      <h4>Derived units</h4>
+      <div class="m d">\begin{aligned}
+\text{density} &amp;&amp; \rho &amp;= \tfrac{m}{V} &amp;&amp; \tfrac{\text{kg}}{\text{m}^3} \\
+\text{pressure} &amp;&amp; p &amp;= \tfrac{F}{A} &amp;&amp; \tfrac{\text{N}}{\text{m}^2} = \text{Pa} \\
+\text{velocity} &amp;&amp; v &amp;= \tfrac{d}{t} &amp;&amp; \tfrac{\text{m}}{\text{s}} \\
+\text{acceleration} &amp;&amp; a &amp;= \tfrac{\Delta v}{\Delta t} &amp;&amp; \tfrac{\text{m}}{\text{s}^2} \\
+\text{momentum} &amp;&amp; p &amp;= mv &amp;&amp; \text{kg} \cdot \tfrac{\text{m}}{\text{s}} \\
+\text{force} &amp;&amp; F &amp;= ma &amp;&amp; \text{kg} \cdot \tfrac{\text{m}}{\text{s}^2} = \text{N (newton)} \\
+\text{work, energy} &amp;&amp; W &amp;= F \cdot d &amp;&amp; \text{N} \cdot \text{m} = \text{J (joule)} \\
+\text{power} &amp;&amp; P &amp;= \tfrac{W}{t} &amp;&amp; \tfrac{\text{J}}{\text{s}} = \text{W (watt)}
+\end{aligned}</div>
+
+      <h4>Prefixes</h4>
+      <div class="tbl"><table>
+        <tr><th>p</th><th>n</th><th>µ</th><th>m</th><th>c</th><th>d</th><th>—</th><th>da</th><th>h</th><th>k</th><th>M</th><th>G</th><th>T</th></tr>
+        <tr><td>10⁻¹²</td><td>10⁻⁹</td><td>10⁻⁶</td><td>10⁻³</td><td>10⁻²</td><td>10⁻¹</td><td>1</td><td>10</td><td>10²</td><td>10³</td><td>10⁶</td><td>10⁹</td><td>10¹²</td></tr>
+      </table></div>
+      <p>pico, nano, micro, milli, centi, deci, —, deca, hecto, kilo, mega, giga, tera</p>
+      <p>A 2 mm ant: <span class="m">0.002 \text{ m} = 2 \cdot 10^{-3} \text{ m} = 2 \text{ mm}</span>. &nbsp; Lake Balaton: <span class="m">80\,000 \text{ m} = 80 \cdot 10^3 \text{ m} = 80 \text{ km}</span>.</p>
+
+      <h4>H1: everyone holding hands round the equator</h4>
+      <div class="m d">\begin{aligned}
+C = 2\pi R &amp;\approx 6R = 6 \cdot 6 \cdot 10^6 \text{ m} = 36 \cdot 10^6 \text{ m} \\
+\text{line} &amp;= 8 \cdot 10^9 \cdot 1.5 \text{ m} = 12 \cdot 10^9 \text{ m} \\
+\text{rounds} &amp;= \frac{12 \cdot 10^9}{36 \cdot 10^6} = \frac{1000}{3} \approx \textcolor{#15803d}{333}
+\end{aligned}</div>
+
+      <h4>Problem 5: plant growth (3.7 m in 14 days)</h4>
+      <div class="m d">\begin{aligned}
+t &amp;= 14 \cdot 24 \cdot 60 \cdot 60 = 1\,209\,600 \text{ s} \qquad d = 3.7 \cdot 10^6\ \mu\text{m} \\
+v &amp;= \frac{3.7 \cdot 10^6}{1\,209\,600} \approx \textcolor{#15803d}{3.06\ \mu\text{m/s}} \\
+\text{1 mm:}\ \ t &amp;= \frac{1000\ \mu\text{m}}{3.06\ \mu\text{m/s}} \approx 327 \text{ s} \approx \textcolor{#15803d}{5.4 \text{ min}}
+\end{aligned}</div>
+
+      <h4>Density of water, volume conversion</h4>
+      <div class="m d">1 \text{ dm}^3 = 1 \text{ L of water} \approx 1 \text{ kg} \ \Rightarrow\ \rho = 1 \tfrac{\text{kg}}{\text{dm}^3} = \textcolor{#1d4ed8}{1000 \tfrac{\text{kg}}{\text{m}^3} = 1 \tfrac{\text{g}}{\text{cm}^3}}</div>
+      <div class="box"><div class="m d">1 \text{ m} = 10 \text{ dm} \ \Rightarrow\ 1 \text{ m}^3 = (10 \text{ dm})^3 = 10^3 \text{ dm}^3 = 1000 \text{ dm}^3</div></div>
+      <p class="oops">For area square the factor, for volume cube it. 1 m³ is 1000 dm³, not 10 dm³.</p>
+      <p>Gold: <span class="m">19.3 \tfrac{\text{g}}{\text{cm}^3} = 19.3 \tfrac{\text{kg}}{\text{dm}^3}</span></p>
+    </div>
+  </article>
+
+  <!-- PHY 20 OCT -->
+  <article class="entry" id="phy-20-oct">
+    <div class="when"><time datetime="2026-10-20">Tue<span>20 Oct</span></time></div>
+    <div class="body">
+      <h3>Units homework · Uniform linear motion</h3>
+      <p class="lect">Board photos · sheets 1_Units and 2_Uniform_linear_motion</p>
+
+      <h4>H11: gry and points</h4>
+      <p>1 gry = 1/10 line, 1 line = 1/12 inch, 1 inch = 72 points.</p>
+      <div class="m d">\begin{aligned}
+1 \text{ gry} &amp;= \tfrac{1}{10} \cdot \tfrac{1}{12} \cdot 72 \text{ points} = 0.6 \text{ point} \\
+1 \text{ gry}^2 &amp;= 0.6^2 \text{ point}^2 = 0.36 \text{ point}^2 \\
+0.5 \text{ gry}^2 &amp;= \textcolor{#15803d}{0.18 \text{ point}^2}
+\end{aligned}</div>
+
+      <h4>H13: a mole of sugar cubes</h4>
+      <div class="m d">V = L^3 = 6 \cdot 10^{23} \text{ cm}^3 \ \Rightarrow\ L = \sqrt[3]{6 \cdot 10^{23}} \text{ cm} \approx 8.4 \cdot 10^7 \text{ cm} \approx \textcolor{#15803d}{843 \text{ km}}</div>
+      <p>Rules used: <span class="m">(ab)^n = a^n b^n</span>, &nbsp; <span class="m">\sqrt[n]{a} = a^{1/n}</span>, &nbsp; <span class="m">\sqrt{ab} = \sqrt a \cdot \sqrt b</span></p>
+
+      <h4>H14: flow rate</h4>
+      <div class="m d">2 \tfrac{\text{dm}^3}{\text{s}} = \frac{2 \cdot 0.001 \text{ m}^3}{\tfrac{1}{3600} \text{ h}} = \textcolor{#15803d}{7.2 \tfrac{\text{m}^3}{\text{h}}} \qquad \text{shortcut: } 1 \tfrac{\text{dm}^3}{\text{s}} = 3.6 \tfrac{\text{m}^3}{\text{h}}</div>
+
+      <h4>Uniform linear motion (v = constant)</h4>
+      <div class="box"><div class="m d">v = \frac{\Delta x}{\Delta t} = \frac{s}{t} \qquad\qquad t = \frac{s}{v} \qquad\qquad s = v \cdot t</div></div>
+      <div class="box"><div class="m d">1 \tfrac{\text{km}}{\text{h}} = \frac{1000 \text{ m}}{3600 \text{ s}} = \frac{1}{3.6} \tfrac{\text{m}}{\text{s}} \qquad \Rightarrow \qquad 3.6 \tfrac{\text{km}}{\text{h}} = 1 \tfrac{\text{m}}{\text{s}}</div><p>km/h ÷ 3.6 → m/s &nbsp; · &nbsp; m/s × 3.6 → km/h &nbsp; · &nbsp; e.g. 100 km/h ≈ 28 m/s (about 30)</p></div>
+
+      <h4>Problem 2: 100 m at 50 km/h</h4>
+      <div class="m d">50 \tfrac{\text{km}}{\text{h}} = 13.89 \tfrac{\text{m}}{\text{s}} \ \Rightarrow\ t = \frac{100}{13.89} = \textcolor{#15803d}{7.2 \text{ s}} \qquad \text{or} \qquad \frac{0.1 \text{ km}}{50 \text{ km/h}} = 0.002 \text{ h} = 7.2 \text{ s}</div>
+
+      <h4>Problem 8: light around the Earth</h4>
+      <div class="m d">\begin{aligned}
+c &amp;= 3 \cdot 10^8 \tfrac{\text{m}}{\text{s}} \\
+2\pi R &amp;= 2 \cdot 3.14 \cdot 6.4 \cdot 10^6 \text{ m} \approx 4 \cdot 10^7 \text{ m} \\
+\text{rounds in 1 s} &amp;= \frac{3 \cdot 10^8}{4 \cdot 10^7} = \textcolor{#15803d}{7.5}
+\end{aligned}</div>
+
+      <h4>Problem 12: two stages</h4>
+      <p>+10 m/s for 6 s (0 → 60 m), then −5 m/s for 4 s (60 m → 40 m).</p>
+      <div class="m d">\begin{aligned}
+\text{distance (scalar, always} \ge 0) &amp;= 60 + 20 = \textcolor{#15803d}{80 \text{ m}} \\
+\text{displacement (vector)} = \text{final} - \text{start} &amp;= 40 - 0 = \textcolor{#15803d}{+40 \text{ m}} \\
+\text{average speed} = \tfrac{\text{total distance}}{\text{total time}} &amp;= \tfrac{80}{10} = \textcolor{#15803d}{8 \tfrac{\text{m}}{\text{s}}} \\
+\text{average velocity} = \tfrac{\text{displacement}}{\text{total time}} &amp;= \tfrac{+40}{10} = \textcolor{#15803d}{+4 \tfrac{\text{m}}{\text{s}}}
+\end{aligned}</div>
+      <figure class="sketch">
+        <svg width="240" height="205" viewBox="0 0 240 205" role="img" aria-label="Position-time graph rising to 60 metres at 6 seconds then falling to 40 metres at 10 seconds">
+          <line x1="30" y1="170" x2="225" y2="170" stroke="#64748b" stroke-width="1.2"/>
+          <line x1="30" y1="175" x2="30" y2="8" stroke="#64748b" stroke-width="1.2"/>
+          <text x="196" y="162" class="t-p">t (s)</text><text x="4" y="12" class="t-p">x (m)</text>
+          <line x1="138" y1="20" x2="138" y2="170" stroke="#cbd5e1" stroke-dasharray="3 4"/>
+          <line x1="210" y1="70" x2="210" y2="170" stroke="#cbd5e1" stroke-dasharray="3 4"/>
+          <line x1="30" y1="20" x2="138" y2="20" stroke="#cbd5e1" stroke-dasharray="3 4"/>
+          <line x1="30" y1="70" x2="210" y2="70" stroke="#cbd5e1" stroke-dasharray="3 4"/>
+          <text x="134" y="186" class="t-p">6</text><text x="203" y="186" class="t-p">10</text>
+          <text x="10" y="24" class="t-p">60</text><text x="10" y="74" class="t-p">40</text>
+          <polyline points="30,170 138,20 210,70" fill="none" stroke="#1d4ed8" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+          <line x1="30" y1="170" x2="210" y2="70" stroke="#15803d" stroke-width="1.8" stroke-dasharray="6 4"/>
+          <text x="112" y="140" class="t-g" style="font-weight:700">slope = +4 m/s</text>
+        </svg>
+        <svg width="240" height="205" viewBox="0 0 240 205" role="img" aria-label="Velocity-time graph: plus 10 for 6 seconds, area plus 60, then minus 5 for 4 seconds, area minus 20">
+          <rect x="30" y="20" width="108" height="100" fill="#dbeafe"/>
+          <rect x="138" y="120" width="72" height="50" fill="#fee2e2"/>
+          <line x1="30" y1="120" x2="225" y2="120" stroke="#64748b" stroke-width="1.2"/>
+          <line x1="30" y1="185" x2="30" y2="8" stroke="#64748b" stroke-width="1.2"/>
+          <text x="214" y="112" class="t-p">t (s)</text><text x="4" y="12" class="t-p">v (m/s)</text>
+          <polyline points="30,20 138,20 138,170 210,170" fill="none" stroke="#1e293b" stroke-width="2.2" stroke-linejoin="round"/>
+          <text x="10" y="24" class="t-p">10</text><text x="12" y="174" class="t-p">−5</text>
+          <text x="126" y="134" class="t-p">6</text><text x="213" y="134" class="t-p">10</text>
+          <text x="62" y="76" class="t-b" style="font-weight:700;font-size:15px">+60</text>
+          <text x="156" y="152" class="t-r" style="font-weight:700;font-size:15px">−20</text>
+        </svg>
+        <figcaption>x–t graph: slope = velocity; the start-to-end line gives the average velocity. v–t graph: area = displacement (60 − 20 = +40 m); the total distance adds the areas as positives (60 + 20 = 80 m).</figcaption>
+      </figure>
+      <p class="oops">Average speed uses the total <b>distance</b>, average velocity uses the <b>displacement</b>. Area below the t-axis counts as negative.</p>
+    </div>
+  </article>
+</section>
+
+<p class="updated">Last updated <span id="last-updated">Tue 27 Oct 2026</span> · built from Classe365 lecture notes and Dr Szilágyi's Drive</p>
+</div>
+
+<script>
+(function(){
+  // render maths
+  function renderMath(){
+    if(!window.katex) return;
+    document.querySelectorAll('.m').forEach(function(el){
+      if(el.dataset.done) return;
+      var tex = el.textContent;
+      try{ katex.render(tex, el, {displayMode: el.classList.contains('d'), throwOnError:false, strict:false}); el.dataset.done = '1'; }catch(e){}
+    });
+  }
+  renderMath();
+
+  // tabs on the hash: #algebra, #discrete, #physics
+  var subjects = ['algebra','discrete','physics'];
+  function show(id){
+    if(subjects.indexOf(id) < 0) id = 'algebra';
+    subjects.forEach(function(s){
+      var sec = document.getElementById('sec-'+s), tab = document.getElementById('tab-'+s);
+      var on = s === id;
+      sec.hidden = !on; tab.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+  }
+  function fromHash(){
+    var h = (location.hash || '').replace('#','');
+    var el = h && document.getElementById(h);
+    if(el && el.classList.contains('entry')){
+      show(el.closest('.subject').id.replace('sec-',''));
+      el.scrollIntoView();
+      return;
+    }
+    show(h);
+  }
+  document.querySelectorAll('nav.tabs button').forEach(function(b){
+    b.addEventListener('click', function(){
+      var id = b.dataset.tab;
+      if(location.hash !== '#'+id){ location.hash = id; } else { show(id); }
+      window.scrollTo({top:0});
+    });
+  });
+  document.querySelectorAll('.chips button').forEach(function(b){
+    b.addEventListener('click', function(){
+      var el = document.getElementById(b.dataset.go);
+      if(el) el.scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'});
+    });
+  });
+  document.querySelectorAll('.hw-toggle').forEach(function(b){
+    b.addEventListener('click', function(){
+      var hw = b.closest('.hw'); var hide = !hw.classList.contains('hide-w');
+      hw.classList.toggle('hide-w', hide);
+      b.textContent = hide ? 'Show working' : 'Hide working';
+      b.setAttribute('aria-pressed', hide ? 'true' : 'false');
+    });
+  });
+  window.addEventListener('hashchange', fromHash);
+  fromHash();
+})();
+</script>
+</body></html>
